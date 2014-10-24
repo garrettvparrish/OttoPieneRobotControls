@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Otto Piene Light Ballet Controls</title>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.flot.js"></script>
+	<script type="text/javascript" src="js/goldenlayout.min.js"></script>
+
+	<link type="text/css" rel="stylesheet" href="css/goldenlayout-base.css" />
+	<link type="text/css" rel="stylesheet" href="css/flot.css" />
+	<link type="text/css" rel="stylesheet" href="css/goldenlayout-dark-theme.css" />
+
+</head>
+<body>
+	<script type="text/javascript" src="js/layout.js">
+		console.log("layout");
+
+		var config = {
+		    settings: {hasHeaders:false},
+		    dimensions: {borderWidth:2},
+		    content: [{
+		        type: 'row',
+		        content: [{
+		            type: 'column',
+		            width: 60,
+		            content: [
+		            	{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            },{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            },{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            }
+		            ]
+		        }, {
+		            type: 'column',
+		            width: 60,
+		            content: [
+		            	{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            },{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            },{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            }
+		            ]
+
+		        },{
+		            type: 'column',
+		            width: 60,
+		            content: [
+		            	{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            },{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            },{
+			                type: 'component',
+			                componentName: 'graph',
+			                height: 100
+			            }
+		            ]
+
+		        }]
+		    }]
+		};
+
+		var myLayout = new GoldenLayout(config);
+
+		myLayout.registerComponent('graph', function(container, state) {
+
+		});
+
+		myLayout.init();
+	</script>
+</body>
+</html>
