@@ -10,6 +10,47 @@ var PanelGraphNode = function() {
     graph.className = "graph-container";
     graphCount += 1;
 
+    var title = "";
+    switch (graphCount) {
+      // Motor 1
+      case 1:
+        title = "MOTOR 1"
+        break;
+
+      // Motor 2
+      case 2:
+        title = "MOTOR 2"
+        break;
+
+      // Motor 3
+      case 3:
+        title = "MOTOR 3"
+        break;
+
+      // Rotational Velocity Graph
+      case 4:
+        title = "ROTATIONAL VELOCITY"
+        break;
+
+      // Horizontal Velocity Graph
+      case 5:
+        title = "HORIZONTAL VELOCITY"
+        break;
+
+      // Vertical Velocity Graph
+      case 6:
+        title = "VERTICAL VELOCITY"
+        break;
+
+      default:
+        break;
+    } 
+
+    container.getElement().html( '<h2 class="label">' + title + '</h2>' )
+
+
+
+
     container.getElement()[0].appendChild(graph);
 
     // We use an inline data source in the example, usually data would

@@ -76,16 +76,16 @@ myLayout.registerComponent('horizontalVelocityGraph', graphNode.initPanel);
 myLayout.registerComponent('verticalVelocityGraph', graphNode.initPanel);
 
 myLayout.registerComponent('rotationalVelocityController', function (container, componentState) {
-	container.getElement().html( '<h2 class="label">' + "ROTATIONAL VELOCITY" + '</h2>' );
+	container.getElement().html( '<h2 class="label">' + "ROTATIONAL VELOCITY CONTROL" + '</h2>' );
 });
 
 myLayout.registerComponent('gyro', function (container, componentState) {
-	
+	container.getElement().html( '<h2 class="label">' + "GYRO" + '</h2>' );
 });
 
 
 myLayout.registerComponent('translationalVelocityController', function (container, componentState) {
-	
+	container.getElement().html( '<h2 class="label">' + "TRANSLATIONAL VELOCITY CONTROL" + '</h2>' );
 });
 
 myLayout.init();
