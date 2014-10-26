@@ -50,8 +50,8 @@ var PanelGraphNode = function() {
     }
 
     // Set up the control widget
-
-    var plot = $.plot("#graph-"+graphCount, [ getRandomData() ], {
+    var graphName = "#graph-"+graphCount;
+    var plot = $.plot(graphName, [ getRandomData() ], {
       series: {
         shadowSize: 0 // Drawing is faster without shadows
       },
