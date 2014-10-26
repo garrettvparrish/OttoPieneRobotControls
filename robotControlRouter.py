@@ -16,6 +16,7 @@ def index():
     	x = request.args.get('x')
 	y = request.args.get('y')
     	r = request.args.get('r')
+        templateData = {}
     	print str(x) + " " + str(y) + " " + str(r)
     	return render_template('main.html', **templateData)
 
