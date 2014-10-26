@@ -61,7 +61,7 @@ var init = function () {
 		console.log("Rotational: Theta " + theta);
 		updateRotationalVelocity(theta.toFixed(2));
 	}, false);
-	rotationalVelocityController.addEventListener('touchup', function (e) {
+	rotationalVelocityController.addEventListener('touchend', function (e) {
 		updateRotationalVelocity(0.0);
 	});
 
@@ -78,7 +78,7 @@ var init = function () {
 		updateVerticalVelocity(y.toFixed(2));
 	}, false);
 
-	translationalVelocityController.addEventListener('touchup', function (e) {
+	translationalVelocityController.addEventListener('touchend', function (e) {
 		updateHorizontalVelocity(0.0);
 		updateVerticalVelocity(0.0);
 	});
