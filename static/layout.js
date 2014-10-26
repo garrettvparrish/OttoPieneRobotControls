@@ -67,27 +67,27 @@ var config = {
 
         var graphNode = new PanelGraphNode();
 
-		myLayout.registerComponent('motor1Graph'), graphNode.initPanel);
+		myLayout.registerComponent('motor1Graph', graphNode.initPanel);
 
-		myLayout.registerComponent('rotationalVelocityGraph'), graphNode.initPanel);
+		myLayout.registerComponent('rotationalVelocityGraph', graphNode.initPanel);
 
-		myLayout.registerComponent('rotationalVelocityController'), function (container, componentState) {
+		myLayout.registerComponent('rotationalVelocityController', function (container, componentState) {
 			
 		});
 
-		myLayout.registerComponent('motor2Graph'), graphNode.initPanel);
+		myLayout.registerComponent('motor2Graph', graphNode.initPanel);
 
-		myLayout.registerComponent('horizontalVelocityGraph'), graphNode.initPanel);
+		myLayout.registerComponent('horizontalVelocityGraph', graphNode.initPanel);
 
-		myLayout.registerComponent('gyro'), function (container, componentState) {
+		myLayout.registerComponent('gyro', function (container, componentState) {
 			
 		});
 
-		myLayout.registerComponent('motor3Graph'), graphNode.initPanel);
+		myLayout.registerComponent('motor3Graph', graphNode.initPanel);
 
-		myLayout.registerComponent('verticalVelocityGraph'), graphNode.initPanel);
+		myLayout.registerComponent('verticalVelocityGraph', graphNode.initPanel);
 
-		myLayout.registerComponent('translationalVelocityController'), function (container, componentState) {
+		myLayout.registerComponent('translationalVelocityController', function (container, componentState) {
 			
 		});
 
