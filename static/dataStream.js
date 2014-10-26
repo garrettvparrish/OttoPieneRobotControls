@@ -80,14 +80,6 @@ var init = function () {
 		updateHorizontalVelocity(x.toFixed(2));
 		updateVerticalVelocity(y.toFixed(2));
 
-		$.get(
-		    url = dataSubmissionUrl,
-		    data={'x':x, 'y', y}, 
-		    success=function(data) {
-		       alert('page content: ' + data);
-		    }
-		);
-
 	}, false);
 
 	translationalVelocityController.addEventListener('touchend', function (e) {

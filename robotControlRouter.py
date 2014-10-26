@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from nanpy import Arduino as A
+from nanpy import (SPI, Wire, L3G, Servo)
 import os
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
 
@@ -11,6 +12,133 @@ green = 11
 A.pinMode(red, A.OUTPUT)
 A.pinMode(green, A.OUTPUT)
 
+#####################
+####### Gyro ########
+#####################
+
+L3G gyro
+gyroSum = 0
+gyroOffset = 0.0
+Xval = 0
+
+# gyro calibration variables
+gyromin = -25000
+gyromax = 25000
+
+# gyro smoothing variables
+i = 0
+gyroaverage  = 0.
+numReadings = 5
+Xval_total = 0
+noisefloor = 100
+spinError = 0
+
+#####################
+###### MOTORS #######
+#####################
+
+# Motors 
+Servo motor1 # front
+Servo motor2 # back right
+Servo motor3 # back left
+
+# Motor Pins
+motor1 = 9 # front motor
+motor2 = 6 # back right motor
+motor3 = 5 # back left motor
+
+# Minimum and maximum motor values
+m1max = 2000
+m1min = 1000
+m2max = 2000
+m2min = 1000
+m3max = 2000
+m3min = 1000
+
+# Scales
+m1scale = 1.0
+m2scale = 1.0
+m3scale = 1.0
+
+#####################
+##### Control #######
+#####################
+
+lastpwm1a = 0
+lastpwm2a = 0
+lastpwm3a = 0
+
+neutral1 = 1500
+neutral2 = 1500
+neutral3 = 1500
+
+pwm1 = 1500
+pwm2 = 1500
+pwm3 = 1500
+spinCommand = 0
+spin = 0
+lastSpin = 0
+
+UDstring = ""
+lastUDstring = ""
+LRstring = ""
+lastLRstring = ""
+SPstring = ""
+lastSPstring = ""
+
+updownval
+lastupdownval
+leftrightval
+lastleftrightval
+spinval
+lastspinval
+
+SPint = 0
+lastSPint = 0
+UDint = 0
+lastUDint = 0
+LRint = 0
+lastLRint = 0
+
+analogLed = 3
+threshold = 10
+
+thetaScale = 0.
+thetaCommand = 0.
+theta = 0.
+pwmthresh = 10
+lasttheta = 0.
+RCommand = 0.
+R = 0.
+lastR = 0.
+operationRange = 200
+
+dataSet = 0
+lastdataSet = 0
+lastSensorReading = 0
+nextpoint = 0
+inputString = ""
+lastinputString = ""
+datapacket = ""
+
+# LEDs
+LEDf1 = 13;
+LEDb1 = 12;
+LEDf2 = 11;
+LEDb2 = 10;
+LEDf3 = 9;
+LEDb3 = 8;
+
+# Timeouts
+timeout = 10; # if no signal from controller, wait for 10 loops before stopping.
+timecount = 0;
+lasttimecount = 0;
+
+# Constants
+sqrt3_2 = 0.866
+pi = 3.141
+PI_2 = 6.283;
+
 @app.route("/", methods=['GET'])
 def index():
     	x = request.args.get('x')
@@ -20,192 +148,38 @@ def index():
     	print str(x) + " " + str(y) + " " + str(r)
     	return render_template('main.html', **templateData)
 
-@app.route("/red")
-def blinkRed():
-    for ii in range(0,5):
-        A.digitalWrite(red, A.HIGH)
-        A.delay(1000)
-        A.digitalWrite(red, A.LOW)
-        A.delay(1000)
-    return ('',200)
+@app.route("/update/<float:x>")
+def updateX():
+        print x
+        return (x, 200)
 
-@app.route("/green")
-def blinkGreen():
-    for ii in range(0,5):
-        A.digitalWrite(green, A.HIGH)
-        A.delay(1000)
-        A.digitalWrite(green, A.LOW)
-        A.delay(1000)
-    return ('',200)
+@app.route("/update/<float:y>")
+def updateY():
+        print x
+        return (x, 200)
+
+@app.route("/update/<float:r>")
+def updateR():
+        print x
+        return (x, 200)
+
 
 if __name__ == "__main__":
     app.run(host="18.111.29.224", port=12345, debug=True)
-
-
-# #include <SPI.h>
-# #include <Wire.h>
-# #include <L3G.h>
-# #ifndef __arm__
-# #include <avr/pgmspace.h>
-# #else
-# #define PROGMEM const
-# #define F(x) x
-# #endif
-# #include <Servo.h>
-
-# L3G gyro;
-
-# int gyroSum = 0;
-# float gyroOffset = 0;
-# int Xval = 0;
-
-# //gyro calibration variables
-# int gyromin = -25000;
-# int gyromax = 25000;
-
-# //gyroscope smoothing variables
-# int i = 0;
-# float gyroaverage  = 0.;
-# int numReadings = 5;
-# long Xval_total = 0;
-# int noisefloor = 100;
-# int spinError = 0;
-
-# //robot control variables
-
-# Servo servo1; //front motor
-# Servo servo2; //back right motor
-# Servo servo3; //back left motor
-
-# unsigned const int LEDf1 = 13;
-# unsigned const int LEDb1 = 12;
-# unsigned const int LEDf2 = 11;
-# unsigned const int LEDb2 = 10;
-# unsigned const int LEDf3 = 9;
-# unsigned const int LEDb3 = 8;
-
-# const int timeout = 10; //if no signal from controller, wait for 10 loops before stopping.
-# int timecount = 0;
-# int lasttimecount = 0;
-
-# #define sqrt3_2  0.866
-# #define pi  3.141
-# const float  PI_2 =  6.283;
-
-# float m1scale = 1.0;
-# float m2scale = 1.0;
-# float m3scale = 1.0;
-
-# const int m1max = 2000;
-# const int m1min = 1000;
-# const int m2max = 2000;
-# const int m2min = 1000;
-# const int m3max = 2000;
-# const int m3min = 1000;
-
-
-
-
-# //const int m1max = 1875;
-# //const int m1min = 1075;
-# //const int m2max = 1980;
-# //const int m2min = 1000;
-# //const int m3max = 1950;
-# //const int m3min = 1050;
-
-# float thetaScale = 0.;
-# float thetaCommand = 0.;
-# float theta = 0.;
-# const int motor1 = 9; //front motor
-# const int motor2 = 6; //back right motor
-# const int motor3 = 5; //back left motor
-# const int pwmthresh = 10;
-# float lasttheta = 0.;
-# float RCommand = 0.;
-# float R = 0.;
-# float lastR = 0.;
-
-# int lastpwm1a = 0;
-# int lastpwm2a = 0;
-# int lastpwm3a = 0;
-
-
-
-# const int operationRange = 200;
-
-# const int neutral1 = 1500;
-# const int neutral2 = 1500;
-# const int neutral3 = 1500;
-
-# //const int neutral1 = 1480;
-# //const int neutral2 = 1480;
-# //const int neutral3 = 1450;
-
-# int pwm1 = 1500;
-# int pwm2 = 1500;
-# int pwm3 = 1500;
-# int spinCommand = 0;
-# int spin = 0;
-# int lastSpin = 0;
-
-# int SPint = 0;
-# int lastSPint = 0;
-# int UDint = 0;
-# int lastUDint = 0;
-# int LRint = 0;
-# int lastLRint = 0;
-
-# //const int sensorPin = A0; //inputsensor
-# const int analogLed = 3;
-# const int threshold = 10;
-
-# //char datapacket[3] = {' ', ' ', ' '};
-# int dataSet = 0;
-# int lastdataSet = 0;
-# int lastSensorReading = 0;
-# int nextpoint = 0;
-# String inputString = "";
-# String lastinputString = "";
-# String datapacket = "";
-
-# String UDstring = "";
-# String lastUDstring = "";
-# String LRstring = "";
-# String lastLRstring = "";
-# String SPstring = "";
-# String lastSPstring = "";
-
-
-# int updownval;
-# int lastupdownval;
-# int leftrightval;
-# int lastleftrightval;
-# int spinval;
-# int lastspinval;
-
-
 
 # void setup() {
 
 #   Serial.begin(9600);
 
-#   // robot setup
-#   pinMode(LEDf1, OUTPUT);
-#   pinMode(LEDb1, OUTPUT);
-#   pinMode(LEDf2, OUTPUT);
-#   pinMode(LEDb2, OUTPUT);
-#   pinMode(LEDf3, OUTPUT);
-#   pinMode(LEDb3, OUTPUT);
-
-#   servo1.attach(motor1);
-#   servo2.attach(motor2);
-#   servo3.attach(motor3);
+#   motor# attach);
+#   motor2.# attach(motor2;
+#   motor3. # back left
 
 #   digitalWrite(LEDf1, HIGH);
 
-#   servo1.writeMicroseconds(neutral1);
-#   servo2.writeMicroseconds(neutral2);
-#   servo3.writeMicroseconds(neutral3);
+# # motor1(neutral1);
+# #   motor2(neutral2);
+#   motor3. # back left
 
 #   delay(5000);
 
@@ -264,9 +238,9 @@ if __name__ == "__main__":
 
 #   else {
 
-#     servo1.writeMicroseconds(neutral1);
-#     servo2.writeMicroseconds(neutral2);
-#     servo3.writeMicroseconds(neutral3);
+#   # motor1(neutral1);
+# #     motor2(neutral2);
+#     motor3. # back left
 
 #     pwm1 = neutral1;
 #     pwm2 = neutral2;
@@ -388,14 +362,13 @@ if __name__ == "__main__":
 #   //  pwm2 = constrain(map(pwm2a, -1000, 1000, m2min, m2max) + (neutral2-1500) + spin, 1000, 2000);
 #   //  pwm3 = constrain(map(pwm3a, -1000, 1000, m3min, m3max) + (neutral3-1500) + spin, 1000, 2000);
 
-#   servo1.writeMicroseconds(pwm1);
+#   motor1.writeMicroseconds(pwm1);
 #   //analogWrite(13, map(constrain(pwm1, neutral1, 1950), neutral1, 1950, 0, 255));
 #   //analogWrite(12,255- map(pwm1, neutral1, 1050, 255, 0));
-#   servo2.writeMicroseconds(pwm2);
-#   //analogWrite(11, map(constrain(pwm2, neutral2, 1950), neutral2, 1950, 0, 255));
-#   //analogWrite(10,255- map(pwm2, neutral2, 1050, 255, 0));
-#   servo3.writeMicroseconds(pwm3);
-#   //analogWrite(9, map(constrain(pwm3, neutral3, 1950), neutral3, 1950, 0, 255));
+#   motor# writeMicroseconds);
+#   //analogWrite(11, map(constrain(pwm2, # neutral2,), neutral2, 1950, 0, 255));#   //analog
+Write(10,255- map(pwm2, neutral2, 1050, 255, 0)); # back left
+#   motor3.ogWrite(9, map(constrain(pwm3, neutral3, 1950), neutral3, 1950, 0, 255));
 #   //analogWrite(8,255- map(pwm3, neutral3, 1050, 255, 0));
 
 #   //  values stored for next loop of program
@@ -430,9 +403,9 @@ if __name__ == "__main__":
 #   pwm2 = map(lastpwm2a, -2000, 2000, m2min, m2max) + (neutral2 - 1500) + spinError;
 #   pwm3 = map(lastpwm3a, -2000, 2000, m3min, m3max) + (neutral3 - 1500) + spinError;
 
-#   servo1.writeMicroseconds(pwm1);
-#   servo2.writeMicroseconds(pwm2);
-#   servo3.writeMicroseconds(pwm3);
+# # motor1(pwm1);
+# #   motor2(pwm2);
+#   motor3. # back left
 
 # }
 
