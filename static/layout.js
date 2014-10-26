@@ -65,7 +65,7 @@ var config = {
 
 var myLayout = new GoldenLayout(config);
 
-var graphNode = new panelGraphNode();
+var graphNode = new PanelGraphNode();
 
 myLayout.registerComponent('motor1Graph', graphNode.initPanel);
 myLayout.registerComponent('motor2Graph', graphNode.initPanel);
@@ -76,7 +76,7 @@ myLayout.registerComponent('horizontalVelocityGraph', graphNode.initPanel);
 myLayout.registerComponent('verticalVelocityGraph', graphNode.initPanel);
 
 myLayout.registerComponent('rotationalVelocityController', function (container, componentState) {
-	container.getElement().html( '<h2>' + "ROTATIONAL VELOCITY" + '</h2>' );
+	container.getElement().html( '<h2 class="label">' + "ROTATIONAL VELOCITY" + '</h2>' );
 });
 
 myLayout.registerComponent('gyro', function (container, componentState) {

@@ -18,8 +18,6 @@ var PanelGraphNode = function() {
     var data = [],
       totalPoints = 300;
 
-    function getRandomData() {
-
       if (data.length > 0)
         data = data.slice(1);
 
@@ -65,11 +63,10 @@ var PanelGraphNode = function() {
     // });
 
     function update() {
-      plot.setData([getRandomData()]);
-      plot.draw();
+      // plot.setData([getRandomData()]);
+      // plot.draw();
       setTimeout(update, 1000);
     }
 
     update();
-  }
 }
