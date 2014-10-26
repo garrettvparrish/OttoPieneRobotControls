@@ -141,7 +141,7 @@ A.pinMode(green, A.OUTPUT)
 
 @app.route("/", methods=['GET'])
 def index():
-    templateData = {}
+    	templateData = {}
 	return render_template('main.html', **templateData)
 
 # ?key=value
