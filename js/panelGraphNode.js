@@ -1,6 +1,3 @@
-var bb = require("../hpexperiments/benb_utils.js");
-var fs = require('fs');
-
 var graphCount = 0
 
 var PanelGraphNode = function() {

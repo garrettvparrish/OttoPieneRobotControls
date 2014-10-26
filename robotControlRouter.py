@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
 from nanpy import Arduino as A
 import os
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
@@ -14,10 +13,7 @@ A.pinMode(green, A.OUTPUT)
 
 @app.route("/")
 def index():
-	print 'TEMPLATE DIRECTORY'
-	print tmpl_dir
-	print 'Index Endpoint'
-	templateData = {}
+    templateData = {}
 	return render_template('main.html', **templateData)
 
 @app.route("/red")
