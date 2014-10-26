@@ -15,11 +15,16 @@ var controllerHeightOffset = 50.0;
 var controllerHeight = 250.0;
 var translationalVelocityMappingCoefficient = controllerWidth/2.0;
 
+// Current Values
+var currentHorizontalVelocity;
+var currentVerticalVelocity;
+var currentRotationalVelocity;
+
 // Counters
 var count = 0;
 
 // Data submission
-var dataSubmissionUrl = "18.111.29.224:12345/";
+var dataSubmissionUrl = "18.111.29.224:12345/update";
 
 var init = function () {
 	console.log("Initializing Data Stream");
@@ -63,6 +68,10 @@ var init = function () {
 
 		console.log("Rotational: Theta " + theta);
 		updateRotationalVelocity(theta.toFixed(2));
+		
+		// Submit all values
+		updateValues();
+
 	}, false);
 	rotationalVelocityController.addEventListener('touchend', function (e) {
 		updateRotationalVelocity(0.0);
@@ -76,9 +85,13 @@ var init = function () {
 		var y = coord['y'] / translationalVelocityMappingCoefficient;
 
 		console.log("Translational: X: " + x + " Y: " + y);
+
 		// Update displays for velocities
 		updateHorizontalVelocity(x.toFixed(2));
 		updateVerticalVelocity(y.toFixed(2));
+
+		// Submit all values
+		updateValues();
 
 	}, false);
 
@@ -87,11 +100,27 @@ var init = function () {
 		updateVerticalVelocity(0.0);
 	});
 
+	// Disable bounce scrolling on controller web page
 	document.ontouchmove = function(event){
 	    event.preventDefault();
 	}
 }
 
+// Submit values to server
+var updateValues = function () {
+
+	// Make a get request
+	$.get(
+	    dataSubmissionUrl,
+	    {'x' : currentHorizontalVelocity, 'y' : currentVerticalVelocity, 'r' : currentRotationalVelocity},
+	    function(data) {
+	       alert('page content: ' + data);
+	    }
+	);
+}
+
+
+// Update methods
 var updateMotor1Value = function (value) {
 	motor1.innerHTML = value;
 }
@@ -106,16 +135,19 @@ var updateMotor3Value = function (value) {
 
 var updateRotationalVelocity = function (value) {
 	rotationalVelocity.innerHTML = value;
+	currentRotationalVelocity = value;
 	// do calculations for all the other ones
 }
 
 var updateHorizontalVelocity = function (value) {
 	horizontalVelocity.innerHTML = value;
+	currentHorizontalVelocity = value;
 	// do calculations for all others
 }
 
 var updateVerticalVelocity = function (value) {
 	verticalVelocity.innerHTML = value;
+	currentVerticalVelocity = value;
 }
 
 setTimeout(init, 1000);

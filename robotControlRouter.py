@@ -141,24 +141,17 @@ PI_2 = 6.283;
 
 @app.route("/", methods=['GET'])
 def index():
-    	x = request.args.get('x')
-	y = request.args.get('y')
-    	r = request.args.get('r')
-        templateData = {}
-    	print str(x) + " " + str(y) + " " + str(r)
-    	return render_template('main.html', **templateData)
+    templateData = {}
+	return render_template('main.html', **templateData)
 
-@app.route("/update", methods=['POST'])
+# ?key=value
+@app.route("/update", methods=['POST', 'GET'])
 def update():
-        if request.method == 'POST':
-            x = request.form['x']
-            y = request.form['y']
-            z = request.form['z']
-            print x
-            print y 
-            print z
-        return (x, 200)
-
+    x = request.args.get('x')
+    y = request.args.get('y')
+    r = request.args.get('r')
+    print str(x) + " " + str(y) + " " + str(r)
+    return (x, 200)
 
 if __name__ == "__main__":
     app.run(host="18.111.29.224", port=12345, debug=True)
