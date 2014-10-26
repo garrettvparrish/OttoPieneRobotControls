@@ -18,6 +18,9 @@ var translationalVelocityMappingCoefficient = controllerWidth/2.0;
 // Counters
 var count = 0;
 
+// Data submission
+var dataSubmissionUrl = "18.111.29.224:12345/";
+
 var init = function () {
 	console.log("Initializing Data Stream");
 	
@@ -76,6 +79,15 @@ var init = function () {
 		// Update displays for velocities
 		updateHorizontalVelocity(x.toFixed(2));
 		updateVerticalVelocity(y.toFixed(2));
+
+		$.get(
+		    url = dataSubmissionUrl,
+		    data={'x':x, 'y', y}, 
+		    success=function(data) {
+		       alert('page content: ' + data);
+		    }
+		);
+
 	}, false);
 
 	translationalVelocityController.addEventListener('touchend', function (e) {

@@ -58,7 +58,6 @@ var config = {
 	                height: 140
 	            }
             ]
-
         }]
     }]
 };
