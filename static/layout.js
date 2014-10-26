@@ -9,15 +9,15 @@ var config = {
 		            content: [
 		            	{
 			                type: 'component',
-			                componentName: 'graph',
+			                componentName: 'motor1Graph',
 			                height: 100
 			            },{
 			                type: 'component',
-			                componentName: 'graph',
+			                componentName: 'rotationalVelocityGraph',
 			                height: 100
 			            },{
 			                type: 'component',
-			                componentName: 'rotationalVelocity',
+			                componentName: 'rotationalVelocityController',
 			                height: 100
 			            }
 		            ]
@@ -27,11 +27,11 @@ var config = {
 		            content: [
 		            	{
 			                type: 'component',
-			                componentName: 'graph',
+			                componentName: 'motor2Graph',
 			                height: 100
 			            },{
 			                type: 'component',
-			                componentName: 'graph',
+			                componentName: 'horizontalVelocityGraph',
 			                height: 100
 			            },{
 			                type: 'component',
@@ -46,15 +46,15 @@ var config = {
 		            content: [
 		            	{
 			                type: 'component',
-			                componentName: 'graph',
+			                componentName: 'motor3Graph',
 			                height: 100
 			            },{
 			                type: 'component',
-			                componentName: 'graph',
+			                componentName: 'verticalVelocityGraph',
 			                height: 100
 			            },{
 			                type: 'component',
-			                componentName: 'translationalVelocity',
+			                componentName: 'translationalVelocityController',
 			                height: 100
 			            }
 		            ]
@@ -65,19 +65,31 @@ var config = {
 
 		var myLayout = new GoldenLayout(config);
 
-                var graphNode = new PanelGraphNode();
-                myLayout.registerComponent('graph', graphNode.initPanel);
+        var graphNode = new PanelGraphNode();
 
-		myLayout.registerComponent('translationalVelocity', function (container, componentState) {
+		myLayout.registerComponent('motor1Graph'), graphNode.initPanel);
 
+		myLayout.registerComponent('rotationalVelocityGraph'), graphNode.initPanel);
+
+		myLayout.registerComponent('rotationalVelocityController'), function (container, componentState) {
+			
 		});
 
-		myLayout.registerComponent('rotationalVelocity', function (container, componentState) {
+		myLayout.registerComponent('motor2Graph'), graphNode.initPanel);
 
+		myLayout.registerComponent('horizontalVelocityGraph'), graphNode.initPanel);
+
+		myLayout.registerComponent('gyro'), function (container, componentState) {
+			
 		});
 
-		myLayout.registerComponent('gyro', function (container, componentState) {
+		myLayout.registerComponent('motor3Graph'), graphNode.initPanel);
 
+		myLayout.registerComponent('verticalVelocityGraph'), graphNode.initPanel);
+
+		myLayout.registerComponent('translationalVelocityController'), function (container, componentState) {
+			
 		});
+
 
 		myLayout.init();
