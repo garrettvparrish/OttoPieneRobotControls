@@ -12,3 +12,21 @@
 	top: 35%;
   	transform: translateY(-50%);
 }
+
+#rotationalVelocityController {
+	width: 200px;
+	height: 200px;
+	border:1px solid #FFFFFF;
+	position: relative;
+	top: 35%;
+  	transform: translateY(20%);
+}
+
+#translationalVelocityController {
+	width: 200px;
+	height: 200px;
+	border:1px solid #FFFFFF;
+	position: relative;
+	top: 35%;
+  	transform: translateY(20%);
+}
