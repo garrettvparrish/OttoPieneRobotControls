@@ -51,18 +51,18 @@ var PanelGraphNode = function() {
 
     // Set up the control widget
     var graphName = "#graph-"+graphCount;
-    var plot = $.plot(graphName, [ getRandomData() ], {
-      series: {
-        shadowSize: 0 // Drawing is faster without shadows
-      },
-      yaxis: {
-        min: 0,
-        max: 100
-      },
-      xaxis: {
-        show: false
-      }
-    });
+    // var plot = $.plot(graphName, [ getRandomData() ], {
+    //   series: {
+    //     shadowSize: 0 // Drawing is faster without shadows
+    //   },
+    //   yaxis: {
+    //     min: 0,
+    //     max: 100
+    //   },
+    //   xaxis: {
+    //     show: false
+    //   }
+    // });
 
     function update() {
       plot.setData([getRandomData()]);
