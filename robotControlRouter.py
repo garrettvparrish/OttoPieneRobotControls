@@ -148,19 +148,15 @@ def index():
     	print str(x) + " " + str(y) + " " + str(r)
     	return render_template('main.html', **templateData)
 
-@app.route("/update/<float:x>")
-def updateX():
-        print x
-        return (x, 200)
-
-@app.route("/update/<float:y>")
-def updateY():
-        print x
-        return (x, 200)
-
-@app.route("/update/<float:r>")
-def updateR():
-        print x
+@app.route("/update", methods=['POST'])
+def update():
+        if request.method == 'POST':
+            x = request.form['x']
+            y = request.form['y']
+            z = request.form['z']
+            print x
+            print y 
+            print z
         return (x, 200)
 
 
