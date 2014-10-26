@@ -12,132 +12,132 @@ green = 11
 A.pinMode(red, A.OUTPUT)
 A.pinMode(green, A.OUTPUT)
 
-#####################
-####### Gyro ########
-#####################
+# #####################
+# ####### Gyro ########
+# #####################
 
-L3G gyro
-gyroSum = 0
-gyroOffset = 0.0
-Xval = 0
+# L3G gyro
+# gyroSum = 0
+# gyroOffset = 0.0
+# Xval = 0
 
-# gyro calibration variables
-gyromin = -25000
-gyromax = 25000
+# # gyro calibration variables
+# gyromin = -25000
+# gyromax = 25000
 
-# gyro smoothing variables
-i = 0
-gyroaverage  = 0.
-numReadings = 5
-Xval_total = 0
-noisefloor = 100
-spinError = 0
+# # gyro smoothing variables
+# i = 0
+# gyroaverage  = 0.
+# numReadings = 5
+# Xval_total = 0
+# noisefloor = 100
+# spinError = 0
 
-#####################
-###### MOTORS #######
-#####################
+# #####################
+# ###### MOTORS #######
+# #####################
 
-# Motors 
-Servo motor1 # front
-Servo motor2 # back right
-Servo motor3 # back left
+# # Motors 
+# Servo motor1 # front
+# Servo motor2 # back right
+# Servo motor3 # back left
 
-# Motor Pins
-motor1 = 9 # front motor
-motor2 = 6 # back right motor
-motor3 = 5 # back left motor
+# # Motor Pins
+# motor1 = 9 # front motor
+# motor2 = 6 # back right motor
+# motor3 = 5 # back left motor
 
-# Minimum and maximum motor values
-m1max = 2000
-m1min = 1000
-m2max = 2000
-m2min = 1000
-m3max = 2000
-m3min = 1000
+# # Minimum and maximum motor values
+# m1max = 2000
+# m1min = 1000
+# m2max = 2000
+# m2min = 1000
+# m3max = 2000
+# m3min = 1000
 
-# Scales
-m1scale = 1.0
-m2scale = 1.0
-m3scale = 1.0
+# # Scales
+# m1scale = 1.0
+# m2scale = 1.0
+# m3scale = 1.0
 
-#####################
-##### Control #######
-#####################
+# #####################
+# ##### Control #######
+# #####################
 
-lastpwm1a = 0
-lastpwm2a = 0
-lastpwm3a = 0
+# lastpwm1a = 0
+# lastpwm2a = 0
+# lastpwm3a = 0
 
-neutral1 = 1500
-neutral2 = 1500
-neutral3 = 1500
+# neutral1 = 1500
+# neutral2 = 1500
+# neutral3 = 1500
 
-pwm1 = 1500
-pwm2 = 1500
-pwm3 = 1500
-spinCommand = 0
-spin = 0
-lastSpin = 0
+# pwm1 = 1500
+# pwm2 = 1500
+# pwm3 = 1500
+# spinCommand = 0
+# spin = 0
+# lastSpin = 0
 
-UDstring = ""
-lastUDstring = ""
-LRstring = ""
-lastLRstring = ""
-SPstring = ""
-lastSPstring = ""
+# UDstring = ""
+# lastUDstring = ""
+# LRstring = ""
+# lastLRstring = ""
+# SPstring = ""
+# lastSPstring = ""
 
-updownval
-lastupdownval
-leftrightval
-lastleftrightval
-spinval
-lastspinval
+# updownval
+# lastupdownval
+# leftrightval
+# lastleftrightval
+# spinval
+# lastspinval
 
-SPint = 0
-lastSPint = 0
-UDint = 0
-lastUDint = 0
-LRint = 0
-lastLRint = 0
+# SPint = 0
+# lastSPint = 0
+# UDint = 0
+# lastUDint = 0
+# LRint = 0
+# lastLRint = 0
 
-analogLed = 3
-threshold = 10
+# analogLed = 3
+# threshold = 10
 
-thetaScale = 0.
-thetaCommand = 0.
-theta = 0.
-pwmthresh = 10
-lasttheta = 0.
-RCommand = 0.
-R = 0.
-lastR = 0.
-operationRange = 200
+# thetaScale = 0.
+# thetaCommand = 0.
+# theta = 0.
+# pwmthresh = 10
+# lasttheta = 0.
+# RCommand = 0.
+# R = 0.
+# lastR = 0.
+# operationRange = 200
 
-dataSet = 0
-lastdataSet = 0
-lastSensorReading = 0
-nextpoint = 0
-inputString = ""
-lastinputString = ""
-datapacket = ""
+# dataSet = 0
+# lastdataSet = 0
+# lastSensorReading = 0
+# nextpoint = 0
+# inputString = ""
+# lastinputString = ""
+# datapacket = ""
 
-# LEDs
-LEDf1 = 13;
-LEDb1 = 12;
-LEDf2 = 11;
-LEDb2 = 10;
-LEDf3 = 9;
-LEDb3 = 8;
+# # LEDs
+# LEDf1 = 13;
+# LEDb1 = 12;
+# LEDf2 = 11;
+# LEDb2 = 10;
+# LEDf3 = 9;
+# LEDb3 = 8;
 
-# Timeouts
-timeout = 10; # if no signal from controller, wait for 10 loops before stopping.
-timecount = 0;
-lasttimecount = 0;
+# # Timeouts
+# timeout = 10; # if no signal from controller, wait for 10 loops before stopping.
+# timecount = 0;
+# lasttimecount = 0;
 
-# Constants
-sqrt3_2 = 0.866
-pi = 3.141
-PI_2 = 6.283;
+# # Constants
+# sqrt3_2 = 0.866
+# pi = 3.141
+# PI_2 = 6.283;
 
 @app.route("/", methods=['GET'])
 def index():
