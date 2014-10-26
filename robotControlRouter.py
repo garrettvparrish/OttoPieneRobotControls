@@ -13,7 +13,7 @@ A.pinMode(green, A.OUTPUT)
 
 @app.route("/")
 def index():
-    templateData = {}
+    	templateData = {}
 	return render_template('main.html', **templateData)
 
 @app.route("/red")
