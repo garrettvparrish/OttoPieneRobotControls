@@ -61,6 +61,9 @@ var init = function () {
 		console.log("Rotational: Theta " + theta);
 		updateRotationalVelocity(theta.toFixed(2));
 	}, false);
+	rotationalVelocityController.addEventListener('touchup', function (e) {
+		updateRotationalVelocity(0.0);
+	});
 
 	translationalVelocityController = document.getElementById("translationalVelocityController");
 	translationalVelocityController.addEventListener('touchmove', function (e) {
@@ -74,6 +77,11 @@ var init = function () {
 		updateHorizontalVelocity(x.toFixed(2));
 		updateVerticalVelocity(y.toFixed(2));
 	}, false);
+
+	translationalVelocityController.addEventListener('touchup', function (e) {
+		updateHorizontalVelocity(0.0);
+		updateVerticalVelocity(0.0);
+	});
 
 	document.ontouchmove = function(event){
 	    event.preventDefault();
