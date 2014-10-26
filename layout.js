@@ -11,7 +11,7 @@ var config = {
             content: [
             	{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'motor1Graph',
 	                height: 100
 	            },{
 	                type: 'component',
@@ -29,7 +29,7 @@ var config = {
             content: [
             	{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'motor2Graph',
 	                height: 100
 	            },{
 	                type: 'component',
