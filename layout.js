@@ -1,4 +1,4 @@
-console.log("layout");
+
 
 var config = {
     settings: {hasHeaders:false},
@@ -15,11 +15,11 @@ var config = {
 	                height: 100
 	            },{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'rotationalVelocityGraph',
 	                height: 100
 	            },{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'rotationalVelocityController',
 	                height: 100
 	            }
             ]
@@ -33,11 +33,11 @@ var config = {
 	                height: 100
 	            },{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'horizontalVelocityGraph',
 	                height: 100
 	            },{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'gyro',
 	                height: 100
 	            }
             ]
@@ -48,15 +48,15 @@ var config = {
             content: [
             	{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'motor3Graph',
 	                height: 100
 	            },{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'verticalVelocityGraph',
 	                height: 100
 	            },{
 	                type: 'component',
-	                componentName: 'graph',
+	                componentName: 'translationalVelocityController',
 	                height: 100
 	            }
             ]
@@ -70,5 +70,43 @@ var myLayout = new GoldenLayout(config);
 myLayout.registerComponent('graph', function(container, state) {
 
 });
+
+
+myLayout.registerComponent('motor1Graph', function (container, state) {
+
+});
+
+myLayout.registerComponent('rotationalVelocityGraph', function (container, state) {
+
+});
+
+myLayout.registerComponent('rotationalVelocityController', function (container, state) {
+
+});
+
+myLayout.registerComponent('motor2Graph', function (container, state) {
+
+});
+
+myLayout.registerComponent('horizontalVelocityGraph', function (container, state) {
+
+});
+
+myLayout.registerComponent('gyro', function (container, state) {
+
+});
+
+myLayout.registerComponent('motor3Graph', function (container, state) {
+
+});
+
+myLayout.registerComponent('verticalVelocityGraph', function (container, state) {
+
+});
+
+myLayout.registerComponent('translationalVelocityController', function (container, state) {
+
+});
+
 
 myLayout.init();
