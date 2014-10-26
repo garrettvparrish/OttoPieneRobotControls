@@ -74,6 +74,10 @@ var init = function () {
 		updateHorizontalVelocity(x.toFixed(2));
 		updateVerticalVelocity(y.toFixed(2));
 	}, false);
+
+	document.ontouchmove = function(event){
+	    event.preventDefault();
+	}
 }
 
 var updateMotor1Value = function (value) {
