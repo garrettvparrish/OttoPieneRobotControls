@@ -10,15 +10,15 @@ var config = {
             	{
 	                type: 'component',
 	                componentName: 'motor1Graph',
-	                height: 100
+	                height: 80
 	            },{
 	                type: 'component',
 	                componentName: 'rotationalVelocityGraph',
-	                height: 100
+	                height: 80
 	            },{
 	                type: 'component',
 	                componentName: 'rotationalVelocityController',
-	                height: 100
+	                height: 140
 	            }
             ]
         }, {
@@ -28,15 +28,15 @@ var config = {
             	{
 	                type: 'component',
 	                componentName: 'motor2Graph',
-	                height: 100
+	                height: 80
 	            },{
 	                type: 'component',
 	                componentName: 'horizontalVelocityGraph',
-	                height: 100
+	                height: 80
 	            },{
 	                type: 'component',
 	                componentName: 'gyro',
-	                height: 100
+	                height: 140
 	            }
             ]
 
@@ -47,15 +47,15 @@ var config = {
             	{
 	                type: 'component',
 	                componentName: 'motor3Graph',
-	                height: 100
+	                height: 80
 	            },{
 	                type: 'component',
 	                componentName: 'verticalVelocityGraph',
-	                height: 100
+	                height: 80
 	            },{
 	                type: 'component',
 	                componentName: 'translationalVelocityController',
-	                height: 100
+	                height: 140
 	            }
             ]
 
@@ -76,16 +76,20 @@ myLayout.registerComponent('horizontalVelocityGraph', graphNode.initPanel);
 myLayout.registerComponent('verticalVelocityGraph', graphNode.initPanel);
 
 myLayout.registerComponent('rotationalVelocityController', function (container, componentState) {
-	container.getElement().html( '<h2 class="label">' + "ROTATIONAL VELOCITY CONTROL" + '</h2>' );
+	var label =  '<h2 class="label">' + "ROTATIONAL VELOCITY CONTROL" + '</h2>';
+	container.getElement().html(label);
+
 });
 
 myLayout.registerComponent('gyro', function (container, componentState) {
-	container.getElement().html( '<h2 class="label">' + "GYRO" + '</h2>' );
+	var label = '<h2 class="label">' + "GYRO" + '</h2>';
+	container.getElement().html(label);
 });
 
 
 myLayout.registerComponent('translationalVelocityController', function (container, componentState) {
-	container.getElement().html( '<h2 class="label">' + "TRANSLATIONAL VELOCITY CONTROL" + '</h2>' );
+	var label = '<h2 class="label">' + "TRANSLATIONAL VELOCITY CONTROL" + '</h2>';
+	container.getElement().html(label);
 });
 
 myLayout.init();

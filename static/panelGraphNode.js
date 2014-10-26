@@ -4,6 +4,8 @@ var PanelGraphNode = function() {
 
   this.initPanel = function(container, componentState) {
 
+    // TODO: NEED TO FIX THIS SO IT OUTPUTS A GRAPH --> NOT HARD ONCE IT WORKS --> JUST GET VALUE FOR NOW
+
     var graphValue = document.createElement('div');
     graphValue.id = "graph-" + graphCount + "-value";
     graphValue.class = "graph-value";
