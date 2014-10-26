@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from nanpy import Arduino as A
 import os
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
