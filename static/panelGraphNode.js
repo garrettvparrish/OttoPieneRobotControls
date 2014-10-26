@@ -48,13 +48,12 @@ var PanelGraphNode = function() {
       default:
         break;
     } 
-    console.log(graphValue);
-
     var heading = '<h2 class="label">' + title + '</h2>';
     var value = '<h2 id="' + graphValue.id + '" class="graphValue">' + 0.0 + '</h2>'
     container.getElement().html(heading + value);
 
     // Update graph count
+    console.log("Created Graph" + graphCount);
     graphCount += 1;
   }
 }

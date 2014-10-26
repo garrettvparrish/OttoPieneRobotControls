@@ -63,6 +63,8 @@ var config = {
     }]
 };
 
+console.log("Creating Layout.");
+
 var myLayout = new GoldenLayout(config);
 
 var graphNode = new PanelGraphNode();
@@ -94,5 +96,3 @@ myLayout.registerComponent('translationalVelocityController', function (containe
 });
 
 myLayout.init();
-
-$("#translationalVelocityController")
