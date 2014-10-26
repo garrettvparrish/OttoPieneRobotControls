@@ -22,22 +22,22 @@ var PanelGraphNode = function() {
 
       // Motor 2
       case 1:
-        title = "MOTOR 2"
+        title = "ROTATIONAL VELOCITY"
         break;
 
       // Motor 3
       case 2:
-        title = "MOTOR 3"
+        title = "MOTOR 2"
         break;
 
       // Rotational Velocity Graph
       case 3:
-        title = "ROTATIONAL VELOCITY"
+        title = "HORIZONTAL VELOCITY"
         break;
 
       // Horizontal Velocity Graph
       case 4:
-        title = "HORIZONTAL VELOCITY"
+        title = "MOTOR 3"
         break;
 
       // Vertical Velocity Graph
@@ -53,7 +53,8 @@ var PanelGraphNode = function() {
     container.getElement().html(heading + value);
 
     // Update graph count
-    console.log("Created Graph" + graphCount);
+    console.log("Created Graph" + graphValue.id);
+    console.log(title)
     graphCount += 1;
   }
 }

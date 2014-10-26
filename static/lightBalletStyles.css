@@ -14,8 +14,8 @@
 }
 
 #rotationalVelocityController {
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
 	border:1px solid #FFFFFF;
 	position: relative;
 	top: 35%;
@@ -23,8 +23,8 @@
 }
 
 #translationalVelocityController {
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
 	border:1px solid #FFFFFF;
 	position: relative;
 	top: 35%;
