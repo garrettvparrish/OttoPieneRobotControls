@@ -1,6 +1,3 @@
-var bb = require("../hpexperiments/benb_utils.js");
-var fs = require('fs');
-
 var graphCount = 0
 
 var PanelGraphNode = function() {
@@ -25,7 +22,7 @@ var PanelGraphNode = function() {
     var memory = [];
 
     // Graph update listener
-    ipc.on('graph-post', function (refcon) {
+    var updateData = function (refcon) {
       var number = parseInt(refcon["graph-number"]) - 1;
 
       if (parseInt(nodeGraphContainer.id.slice(-1)) == number) {
@@ -46,7 +43,7 @@ var PanelGraphNode = function() {
         plot.setData([memory]);        
         plot.draw();        
       }
-    });
+    };
 
     var data = [],
           totalPoints = 300;
@@ -132,8 +129,3 @@ var PanelGraphNode = function() {
     setTimeout(initGraph, 1000);
   }
 }
-
-module.exports = PanelGraphNode;
-
-
-
