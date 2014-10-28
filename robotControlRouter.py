@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from nanpy import Arduino as A
-from nanpy import (SPI, Wire, L3G, Servo)
+#from nanpy import (SPI, Wire, L3G, Servo)
 import os
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
 
