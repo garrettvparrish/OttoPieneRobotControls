@@ -24,7 +24,7 @@ var currentRotationalVelocity;
 var count = 0;
 
 // Data submission
-var dataSubmissionUrl = "18.111.29.224:12345/update";
+var dataSubmissionUrl = "http://18.111.29.224:12345/update";
 
 var init = function () {
 	console.log("Initializing Data Stream");
