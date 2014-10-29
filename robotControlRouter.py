@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
+
 from nanpy import Arduino as A
 #from nanpy import (SPI, Wire, L3G, Servo)
 import os
@@ -159,15 +160,18 @@ def index():
 
 @socketio.on('x', namespace = '/')
 def getX(message):
-    global x = stringToInt(message)
+    global x
+    x = stringToInt(message)
 
 @socketio.on('y', namespace = '/')
 def getX(message):
-    global y = stringToInt(message)
+    global y
+    y = stringToInt(message)
 
 @socketio.on('r', namespace = '/')
 def getX(message):
-    global r = stringToInt(message)
+    global r
+    r = stringToInt(message)
 
 if __name__ == "__main__":
     app.run(host="18.111.29.224", port=12345, debug=True)
