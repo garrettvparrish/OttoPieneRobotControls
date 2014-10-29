@@ -153,7 +153,6 @@ myLayout.registerComponent('gyro', function (container, componentState) {
 
 });
 
-
 myLayout.registerComponent('motor3Graph', graphNode.initPanel);
 myLayout.registerComponent('verticalVelocityGraph', graphNode.initPanel);
 myLayout.registerComponent('translationalVelocityController', function (container, componentState) {
@@ -163,3 +162,6 @@ myLayout.registerComponent('translationalVelocityController', function (containe
 });
 
 myLayout.init();
+
+
+

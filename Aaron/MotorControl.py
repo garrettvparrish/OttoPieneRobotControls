@@ -42,5 +42,4 @@ def TranslateY(y):
 
 def Rotation(r):
     r = ((r + 1)*1000) / 2 + 1000 # map r between 1000 and 2000
-
     return [r, r, r]
