@@ -1,9 +1,10 @@
+
+
 // Connect the socket
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 socket.on('connect', function() {
     socket.emit('my event', {data: 'I\'m connected!'});
 });
-
 
 // Graph displays
 var motor1;
@@ -28,9 +29,6 @@ var currentRotationalVelocity;
 
 // Counters
 var count = 0;
-
-// Data submission
-var dataSubmissionUrl = "http://18.111.29.224:12345/update";
 
 var init = function () {
 	console.log("Initializing Data Stream");
@@ -114,16 +112,6 @@ var init = function () {
 
 // Submit values to server
 var updateValues = function () {
-
-	// Make a get request
-//	$.get(
-//	    dataSubmissionUrl,
-//	    {'x' : currentHorizontalVelocity, 'y' : currentVerticalVelocity, 'r' : currentRotationalVelocity},
-//	    function(data) {
-//	       alert('page content: ' + data);
-//	    }
-//	);
-    
     socket.emit('x',{data: currentHorizontalVelocity});
     socket.emit('y',{data: currentVerticalVelocity});
     socket.emit('r',{data: currentRotationalVelocity});
