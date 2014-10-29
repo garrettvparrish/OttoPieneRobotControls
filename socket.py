@@ -9,7 +9,7 @@ x = 0
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('main.html')
 
 @socketio.on('my event', namespace='/test')
 def test_message(message):
