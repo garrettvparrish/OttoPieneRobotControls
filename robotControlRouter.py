@@ -10,6 +10,9 @@ app = Flask(__name__)#, template_folder=tmpl_dir, static_url_path='')
 #app.config['SECRET_KEY'] = 'lightballet'
 socketio = SocketIO(app)
 import datetime
+import sys
+
+print sys.version
 
 @app.route("/", methods=['GET'])
 def index():
