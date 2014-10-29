@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
+from flask.ext.socketio import SocketIO, emit
 from nanpy import Arduino as A
 #from nanpy import (SPI, Wire, L3G, Servo)
 import os
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
 
 app = Flask(__name__, template_folder=tmpl_dir, static_url_path='')
+app.config['SECRET_KEY'] = 'lightballet'
 import datetime
 
 red = 8
@@ -139,22 +141,42 @@ A.pinMode(green, A.OUTPUT)
 # pi = 3.141
 # PI_2 = 6.283;
 
-@app.route("/", methods=['GET'])
+x = 0
+y = 0
+r = 0
+
+# converts a string to an int. If that is not possible, it returns 0
+def stringToInt(value):
+    try:
+        return int(float(value))
+    except ValueError:
+        return 0
+
+@app.route("/")
 def index():
     	templateData = {}
 	return render_template('main.html', **templateData)
 
-# ?key=value
-@app.route("/update", methods=['POST', 'GET'])
-def update():
-    x = request.args.get('x')
-    y = request.args.get('y')
-    r = request.args.get('r')
-    print str(x) + " " + str(y) + " " + str(r)
-    return (x, 200)
+@socketio.on('x', namespace = '/')
+def getX(message):
+    global x = stringToInt(message)
+
+@socketio.on('y', namespace = '/')
+def getX(message):
+    global y = stringToInt(message)
+
+@socketio.on('r', namespace = '/')
+def getX(message):
+    global r = stringToInt(message)
 
 if __name__ == "__main__":
     app.run(host="18.111.29.224", port=12345, debug=True)
+
+#takes an array of the current motor values and sends it over the socket
+def updateController(motors):
+    socketio.emit('motor1',{'data':motors[0]})
+    socketio.emit('motor2',{'data':motors[1]})
+    socketio.emit('motor3',{'data':motors[2]})
 
 # void setup() {
 

@@ -1,3 +1,9 @@
+// Connect the socket
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+socket.on('connect', function() {
+    socket.emit('my event', {data: 'I\'m connected!'});
+});
+
 
 // Graph displays
 var motor1;
@@ -110,28 +116,32 @@ var init = function () {
 var updateValues = function () {
 
 	// Make a get request
-	$.get(
-	    dataSubmissionUrl,
-	    {'x' : currentHorizontalVelocity, 'y' : currentVerticalVelocity, 'r' : currentRotationalVelocity},
-	    function(data) {
-	       alert('page content: ' + data);
-	    }
-	);
+//	$.get(
+//	    dataSubmissionUrl,
+//	    {'x' : currentHorizontalVelocity, 'y' : currentVerticalVelocity, 'r' : currentRotationalVelocity},
+//	    function(data) {
+//	       alert('page content: ' + data);
+//	    }
+//	);
+    
+    socket.emit('x',{data: currentHorizontalVelocity});
+    socket.emit('y',{data: currentVerticalVelocity});
+    socket.emit('r',{data: currentRotationalVelocity});
 }
 
 
 // Update methods
-var updateMotor1Value = function (value) {
+socket.on('motor1',function (value) {
 	motor1.innerHTML = value;
-}
+});
 
-var updateMotor2Value = function (value) {
+socket.on('motor2',function (value) {
 	motor2.innerHTML = value;
-}
+});
 
-var updateMotor3Value = function (value) {
+socket.on('motor3',function (value) {
 	motor3.innerHTML = value;
-}
+});
 
 var updateRotationalVelocity = function (value) {
 	rotationalVelocity.innerHTML = value;
