@@ -1,19 +1,20 @@
 from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
 
-from nanpy import Arduino as A
+#from nanpy import Arduino as A
 #from nanpy import (SPI, Wire, L3G, Servo)
 import os
-tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
+#tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
 
-app = Flask(__name__, template_folder=tmpl_dir, static_url_path='')
+app = Flask(__name__)#, template_folder=tmpl_dir, static_url_path='')
 app.config['SECRET_KEY'] = 'lightballet'
+socketio = SocketIO(app)
 import datetime
 
-red = 8
-green = 11
-A.pinMode(red, A.OUTPUT)
-A.pinMode(green, A.OUTPUT)
+##red = 8
+##green = 11
+##A.pinMode(red, A.OUTPUT)
+##A.pinMode(green, A.OUTPUT)
 
 # #####################
 # ####### Gyro ########
@@ -155,8 +156,8 @@ def stringToInt(value):
 
 @app.route("/")
 def index():
-    	templateData = {}
-	return render_template('main.html', **templateData)
+    templateData = {}
+    return render_template('main.html', **templateData)
 
 @socketio.on('x', namespace = '/')
 def getX(message):
@@ -174,7 +175,7 @@ def getX(message):
     r = stringToInt(message)
 
 if __name__ == "__main__":
-    app.run(host="18.111.29.224", port=12345, debug=True)
+    app.run(host="18.111.6.206", port=12345, debug=True)
 
 #takes an array of the current motor values and sends it over the socket
 def updateController(motors):
@@ -382,7 +383,7 @@ def updateController(motors):
 #   //analogWrite(12,255- map(pwm1, neutral1, 1050, 255, 0));
 #   motor# writeMicroseconds);
 #   //analogWrite(11, map(constrain(pwm2, # neutral2,), neutral2, 1950, 0, 255));#   //analog
-Write(10,255- map(pwm2, neutral2, 1050, 255, 0)); # back left
+# Write(10,255- map(pwm2, neutral2, 1050, 255, 0)); # back left
 #   motor3.ogWrite(9, map(constrain(pwm3, neutral3, 1950), neutral3, 1950, 0, 255));
 #   //analogWrite(8,255- map(pwm3, neutral3, 1050, 255, 0));
 
