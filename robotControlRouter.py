@@ -14,11 +14,6 @@ import sys
 
 print sys.version
 
-@app.route("/", methods=['GET'])
-def index():
-    	templateData = {}
-	return render_template('main.html', **templateData)
-
 # converts a string to an int. If that is not possible, it returns 0
 def stringToInt(value):
     try:
