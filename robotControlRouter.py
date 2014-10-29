@@ -7,7 +7,7 @@ import os
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '')
 
 app = Flask(__name__)#, template_folder=tmpl_dir, static_url_path='')
-app.config['SECRET_KEY'] = 'lightballet'
+#app.config['SECRET_KEY'] = 'lightballet'
 socketio = SocketIO(app)
 import datetime
 
@@ -175,7 +175,7 @@ def getX(message):
     r = stringToInt(message)
 
 if __name__ == "__main__":
-    app.run(host="18.111.6.206", port=12345, debug=True)
+    socketio.run(app, host='0.0.0.0')
 
 #takes an array of the current motor values and sends it over the socket
 def updateController(motors):
