@@ -76,6 +76,7 @@ var init = function () {
 	}, false);
 	rotationalVelocityController.addEventListener('touchend', function (e) {
 		updateRotationalVelocity(0.0);
+		updateValues();
 	});
 
 	translationalVelocityController = document.getElementById("translationalVelocityController");
@@ -101,6 +102,7 @@ var init = function () {
 	translationalVelocityController.addEventListener('touchend', function (e) {
 		updateHorizontalVelocity(0.0);
 		updateVerticalVelocity(0.0);
+		updateValues();
 	});
 
 	// Disable bounce scrolling on controller web page

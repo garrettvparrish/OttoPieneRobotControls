@@ -60,16 +60,7 @@ var init = function () {
 
 	// Controllers
 	rotationalVelocityController = document.getElementById("rotationalVelocityController");
-    
-    // Sets everything to 0 when a finger is not on the screen
-    rotationalVelocityController.addEventListener('touchend', function (e) {
-        var theta = 0.0;
-        console.log("Rotational: Theta " + theta);
-		updateRotationalVelocity(theta.toFixed(2));
-		
-		// Submit all values
-		updateValues();
-    }
+  
 	rotationalVelocityController.addEventListener('touchmove', function (e) {
 		var touch = e.touches[0]
 		var coord = canvasToRelativeCoordinates(rotationalVelocityController, touch.pageX, touch.pageY)
@@ -112,22 +103,10 @@ var init = function () {
 	}, false);
 	rotationalVelocityController.addEventListener('touchend', function (e) {
 		updateRotationalVelocity(0.0);
+		updateValues();
 	});
 
 	translationalVelocityController = document.getElementById("translationalVelocityController");
-    
-    // Sets everything to 0 when the screen is not being touched
-    translationalVelocityController.addEventListener('touchmove', function (e) {
-        var x = 0.0;
-        var y = 0.0;
-        
-        // Update displays for velocities
-		updateHorizontalVelocity(x.toFixed(2));
-		updateVerticalVelocity(y.toFixed(2));
-
-		// Submit all values
-		updateValues();
-    }
 	translationalVelocityController.addEventListener('touchmove', function (e) {
 		var touch = e.touches[0]
 		var coord = canvasToRelativeCoordinates(translationalVelocityController, touch.pageX, touch.pageY)
@@ -162,6 +141,7 @@ var init = function () {
 	translationalVelocityController.addEventListener('touchend', function (e) {
 		updateHorizontalVelocity(0.0);
 		updateVerticalVelocity(0.0);
+		updateValues();
 	});
 
 	// Disable bounce scrolling on controller web page

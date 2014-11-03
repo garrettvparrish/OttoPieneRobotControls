@@ -1,11 +1,17 @@
 from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
 import math, os, time, logging, serial, time
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
 
 # initialize serial port
 port = serial.Serial("/dev/ttyAMA0", baudrate=19200, timeout=3.0)
 
 #### WRITE DIGITAL HIGH TO THE ARDUINO PAGE #### 
+GPIO.setup(9, GPIO.OUT)
+GPIO.output(9,1)
+time.sleep(5)
 
 # wait 2 seconds
 time.sleep(2)
@@ -17,6 +23,7 @@ app = Flask(__name__, template_folder=tmpl_dir, static_url_path='')
 app.config['SECRET_KEY'] = 'lightballet'
 socketio = SocketIO(app)
 
+print "Initialized..."
 x = ''
 y = ''
 r = ''
@@ -61,9 +68,9 @@ def updateValues(message):
     # (handshake from the arduino has been processed)
     if (READY):
         # set motors to turn on (LEAAVE FOR NOW -- will just spin)
-        motorCommand(128, 1, r * 128)    
-        motorCommand(129, 1, r * 128)
-        motorCommand(130, 1, r * 128)
+        motorCommand(128, 1, r * 127)    
+        motorCommand(129, 1, r * 127)
+        motorCommand(130, 1, r * 127)
 
     emit('motor1', r)
     emit('motor2', x)
