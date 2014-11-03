@@ -2,10 +2,11 @@ from flask import Flask, render_template
 from flask.ext.socketio import SocketIO, emit
 import math, os, time, logging, serial, time
 
-bool READY = False
-
 # initialize serial port
 port = serial.Serial("/dev/ttyAMA0", baudrate=19200, timeout=3.0)
+
+#### WRITE DIGITAL HIGH TO THE ARDUINO PAGE #### 
+
 # wait 2 seconds
 time.sleep(2)
 
