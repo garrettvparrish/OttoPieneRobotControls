@@ -11,9 +11,7 @@ app = Flask(__name__)#, template_folder=tmpl_dir, static_url_path='')
 socketio = SocketIO(app)
 import datetime
 import sys
-
-print sys.version
-
+ 
 # converts a string to an int. If that is not possible, it returns 0
 def stringToInt(value):
     try:
