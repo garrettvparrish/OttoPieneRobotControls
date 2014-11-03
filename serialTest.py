@@ -1,5 +1,4 @@
-import serial
-import time
+import serial, time
 
 time.sleep(2)
 
@@ -26,30 +25,3 @@ def motorCommand(id, dir, val):
     write(val)
     write((id + dir + val) & 0b01111111)
     time.sleep(.1)
-    print '%s %s %s' % (id, dir, val)
-
-while True:
-    motorCommand(128, 0, 50)
-    time.sleep(2)
-    motorCommand(128, 0, 0)
-
-    motorCommand(129, 0, 50)
-    time.sleep(2)
-    motorCommand(129, 0, 0)
-
-    motorCommand(130, 0, 50)
-    time.sleep(2)
-    motorCommand(130, 0, 0)
-
-    motorCommand(128, 1, 50)
-    time.sleep(2)
-    motorCommand(128, 0, 0)
-
-    motorCommand(129, 1, 50)
-    time.sleep(2)
-    motorCommand(129, 0, 0)
-
-    motorCommand(130, 1, 50)
-    time.sleep(2)
-    motorCommand(130, 0, 0)
-
