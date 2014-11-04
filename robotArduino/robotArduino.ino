@@ -20,23 +20,16 @@ void setup() {
 
 boolean triggered = false;
 
-void loop() {
-  
-//  if (digitalRead(DIGITAL_TRIGGER) == LOW) {
+void loop() { 
     if (!triggered) {
       delay(2500);
       motorserial.write(170); // sets baud rate on controllers
       delay(500);
       digitalWrite(INDICATOR_LED, HIGH);  
   
-      motorcommand(MOTOR2, REV, 50);
       delay(500);
       triggered = true;
     }
-    
-//  } else {
-//    digitalWrite(INDICATOR_LED, LOW);
-//  }
 }
 
 void motorcommand(byte id, byte dir, byte val) {

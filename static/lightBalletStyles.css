@@ -20,6 +20,7 @@
 	position: relative;
 	top: 35%;
   	transform: translateY(20%);
+    background-image:url(circle.png);
 }
 
 #translationalVelocityController {
@@ -29,4 +30,5 @@
 	position: relative;
 	top: 35%;
   	transform: translateY(20%);
+    background-image:url(plus.png);
 }
