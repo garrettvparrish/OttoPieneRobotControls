@@ -60,20 +60,14 @@ var init = function () {
 
 	// Controllers
 	rotationalVelocityController = document.getElementById("rotationalVelocityController");
-  
-	rotationalVelocityController.addEventListener('touchmove', function (e) {
+  	var rotationHandler = function (e) {
 		var touch = e.touches[0]
 		var coord = canvasToRelativeCoordinates(rotationalVelocityController, touch.pageX, touch.pageY)
 		var x = coord['x'];
 		var y = coord['y'];
 
 		var theta = 0.0;
-		/*if (x > 0) {
-			theta = (90.0 - Math.atan(y/x) * (180 / Math.PI));
-		} else {
-			theta = 180 + (90.0 - Math.atan(y/x) * (180 / Math.PI));
-		}*/
-        
+
         if(x == 0 && y >= 0){
             theta = 0.0;
         }
@@ -90,24 +84,26 @@ var init = function () {
             theta = Math.atan2(x,y);
         }
         
-        theta = theta / pi;
-        
-        
+        theta = theta / pi;  
         
 		console.log("Rotational: Theta " + theta);
 		updateRotationalVelocity(theta.toFixed(2));
 		
 		// Submit all values
 		updateValues();
+	}
 
-	}, false);
+	rotationalVelocityController.addEventListener('touchmove', rotationHandler, false);
+	rotationalVelocityController.addEventListener('touchstart', rotationHandler, false);
+
 	rotationalVelocityController.addEventListener('touchend', function (e) {
 		updateRotationalVelocity(0.0);
 		updateValues();
 	});
 
 	translationalVelocityController = document.getElementById("translationalVelocityController");
-	translationalVelocityController.addEventListener('touchmove', function (e) {
+	
+	var translationHandler = function (e) {
 		var touch = e.touches[0]
 		var coord = canvasToRelativeCoordinates(translationalVelocityController, touch.pageX, touch.pageY)
 		var x = coord['x'] / translationalVelocityMappingCoefficient;
@@ -135,8 +131,9 @@ var init = function () {
 
 		// Submit all values
 		updateValues();
-
-	}, false);
+	}
+	translationalVelocityController.addEventListener('touchmove', translationHandler, false);
+	translationalVelocityController.addEventListener('touchstart', translationHandler, false);
 
 	translationalVelocityController.addEventListener('touchend', function (e) {
 		updateHorizontalVelocity(0.0);
