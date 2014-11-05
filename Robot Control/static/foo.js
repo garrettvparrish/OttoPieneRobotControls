@@ -46,11 +46,13 @@ $(document).ready(function() {
 		var touch = e.touches[0];
 		var rect = rotationalControl.getBoundingClientRect();
 		var y = touch.pageY - rect.top;
-		console.log(y);
-		var dir = (y < 0) ? REV : FWD;
+		var dir = FWD;
 		var height = 550;
 		var percentage = (y - (height/2)) / (height/2);
-		if (percentage < 0) { percentage = -1*percentage;}
+		if (percentage < 0) { 
+			percentage = -1*percentage;
+			dir = REV;
+		}
 		if ( lock === 0 ) {
 			lock = 1;
 			$.get('/motors?rVal=' + percentage + '&rDir=' + dir,
