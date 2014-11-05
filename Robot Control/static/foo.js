@@ -50,7 +50,7 @@ $(document).ready(function() {
 		var rect = rotationalControl.getBoundingClientRect();
 		var y = touch.pageY - rect.top;
 		var dir = FWD;
-		var height = 550;
+		var height = 350;
 		var percentage = (y - (height/2)) / (height/2);
 		if (percentage < 0) { 
 			percentage = -1*percentage;
