@@ -6,12 +6,7 @@ var config = {
         content: [{
             type: 'column',
             width: 60,
-            content: [
-            	{
-	                type: 'component',
-	                componentName: 'motor1Graph',
-	                height: 80
-	            },{
+            content: [{
 	                type: 'component',
 	                componentName: 'rotationalVelocityGraph',
 	                height: 80
@@ -27,10 +22,6 @@ var config = {
             content: [
             	{
 	                type: 'component',
-	                componentName: 'motor2Graph',
-	                height: 80
-	            },{
-	                type: 'component',
 	                componentName: 'horizontalVelocityGraph',
 	                height: 80
 	            },{
@@ -45,10 +36,6 @@ var config = {
             width: 60,
             content: [
             	{
-	                type: 'component',
-	                componentName: 'motor3Graph',
-	                height: 80
-	            },{
 	                type: 'component',
 	                componentName: 'verticalVelocityGraph',
 	                height: 80
