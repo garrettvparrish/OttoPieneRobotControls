@@ -66,45 +66,46 @@ def test():
     print request.args.get('foo')
     return('ok')
 
-m1s,m1d = 0,0
-m2s,m2d = 0,0
-m3s,m3d = 0,0
+rVal,rDir = 0,0
+xVal,xDir = 0,0
+yVal,yDir = 0,0
 @app.route('/motors')
 def motors():
-    global m1s,m1d,m2s,m2d,m3s,m3d
+    # DIR: 0 FWD, 1 REV
+    global rVal,rDir,xVal,xDir,yVal,yDir
     m1,m2,m3 = False,False,False
-    if request.args.get('m1s') is not None:
-        m1s = int(float(request.args.get('m1s')))
+    if request.args.get('rVal') is not None:
+        rVal = int(float(request.args.get('rVal')))
         m1 = True
-    if request.args.get('m1d') is not None:
-        m1d = int(float(request.args.get('m1d')))
+    if request.args.get('rDir') is not None:
+        rDir = int(float(request.args.get('rDir')))
         m1 = True
-    if request.args.get('m2s') is not None:
-        m2s = int(float(request.args.get('m2s')))
+    if request.args.get('xVal') is not None:
+        xVal = int(float(request.args.get('xVal')))
         m2 = True
-    if request.args.get('m2d') is not None:
-        m2d = int(float(request.args.get('m2d')))
+    if request.args.get('xDir') is not None:
+        xDir = int(float(request.args.get('xDir')))
         m2 = True
-    if request.args.get('m3s') is not None:
-        m3s = int(float(request.args.get('m3s')))
+    if request.args.get('yVal') is not None:
+        yVal = int(float(request.args.get('yVal')))
         m3 = True
-    if request.args.get('m3d') is not None:
-        m3d = int(float(request.args.get('m3d')))
+    if request.args.get('yDir') is not None:
+        yDir = int(float(request.args.get('yDir')))
         m3 = True
 
     if m1 is True:
-        motorCommand(128, m1d, m1s)
+        motorCommand(128, rDir, rVal)
     if m2 is True:
-        motorCommand(129, m2d, m2s)
+        motorCommand(129, xDir, xVal)
     if m3 is True:
-        motorCommand(130, m3d, m3s)
+        motorCommand(130, yDir, yVal)
 
-    return('M1 %d %d, M2 %d %d, M3 %d %d' % (m1s,m1d,m2s,m2d,m3s,m3d))
+    return('M1 %d %d, M2 %d %d, M3 %d %d' % (rVal,rDir,xVal,xDir,yVal,yDir))
 
 @app.route('/motorstop')
 def motorstop():
-    global m1s,m1d,m2s,m2d,m3s,m3d
-    m1s,m1d,m2s,m2d,m3s,m3d = 0,0,0,0,0,0
+    global rVal,rDir,xVal,xDir,yVal,yDir
+    rVal,rDir,xVal,xDir,yVal,yDir = 0,0,0,0,0,0
     motorCommand(128, 0, 0)
     motorCommand(129, 0, 0)
     motorCommand(130, 0, 0)
