@@ -6,3 +6,18 @@ body {
     width: 512px; height: 512px;
     background-color: #aaa;
 }
+
+#rotationalControl {
+	width: 100px; height: 100px;	
+	background-color: blue;
+}
+
+#stopButton {
+	width: 100px; height: 100px;	
+	background-color: red;
+}
+
+#translationalControl {
+	width: 100px; height: 100px;	
+	background-color: green;
+}
