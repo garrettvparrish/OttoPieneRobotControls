@@ -43,6 +43,9 @@ $(document).ready(function() {
 	var rotationalControl = document.getElementById("rotationalControl");
 
 	var rotationHandler = function (e) {
+		// No bounce
+		e.preventDefault();
+
 		var touch = e.touches[0];
 		var rect = rotationalControl.getBoundingClientRect();
 		var y = touch.pageY - rect.top;
@@ -68,6 +71,9 @@ $(document).ready(function() {
 	var translationalControl = document.getElementById("translationalControl");
 
 	var translationHandler = function (e) {
+		// No bounce
+		e.preventDefault();
+
 		var touch = e.touches[0];
 		var rect = translationalControl.getBoundingClientRect();
 		var x = touch.pageX - rect.left;
