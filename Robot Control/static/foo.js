@@ -48,7 +48,7 @@ $(document).ready(function() {
 		var y = touch.pageY - rect.top;
 		var dir = (y < 0) ? REV : FWD;
 		var height = 550;
-		var percentage = abs((y - (height/2)) / (height/2));
+		var percentage = Math.abs((y - (height/2)) / (height/2));
 		
 		console.log("ROTATION: " + percentage);
 
