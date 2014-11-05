@@ -1,0 +1,5 @@
+
+
+function mouseMove(event) {
+    console.log('' + event.pageX + ', ' + event.pageY);
+}

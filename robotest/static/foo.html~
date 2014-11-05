@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Light Ballet Controls</title>
+	<script type="text/javascript" src="static/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="static/foo.js"></script>
+	<link type="text/css" rel="stylesheet" href="static/foo.css"/>
+
+</head>
+<body>
+  <div id="control"></div>
+</body>
+</html>
