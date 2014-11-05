@@ -2,22 +2,22 @@ body {
     background-color: white;
 }
 
-#control {
+/*#control {
     width: 512px; height: 512px;
     background-color: #aaa;
 }
-
-#rotationalControl {
-	width: 100px; height: 100px;	
+*/
+#control {
+	width: 33%; height: 100px;	
 	background-color: blue;
 }
 
 #stopButton {
-	width: 100px; height: 100px;	
+	width: 30%; height: 100px;	
 	background-color: red;
 }
 
 #translationalControl {
-	width: 100px; height: 100px;	
+	width: 33%; height: 100px;	
 	background-color: green;
 }
