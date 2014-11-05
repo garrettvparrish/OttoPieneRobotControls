@@ -3,10 +3,10 @@ body {
 }
 
 #rotationalControl {
-	margin-top: 15%;
+	margin-top: 20%;
 	margin-left: 5%;
 	margin-right: 5%;
-	width: 20%; height: 380px;	
+	width: 20%; height: 400px;	
 	background-color: gray;
 	float: left;
 }
