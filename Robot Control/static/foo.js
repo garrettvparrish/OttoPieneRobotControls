@@ -23,6 +23,10 @@ var REV = 1;
 var TOUCHINGROTATION = false;
 var TOUCHINGTRANSLATION = false;
 
+var r;
+var x;
+var y;
+
 // DIR: 0 = FWD, 1 = REV
 
 // HANDLERS
@@ -63,16 +67,22 @@ $(document).ready(function() {
 		var dir = FWD;
 		var height = 400;
 		var percentage = (y - (height/2)) / (height/2);
+
+		// Update global
+		r = percentage;
+		drawRotationalControl();
+
 		if (percentage < 0) { 
 			percentage = -1*percentage;
 			dir = REV;
 		}
-		if ( lock === 0 ) {
-			lock = 1;
-			$.get('/motors?rVal=' + percentage + '&rDir=' + dir,
-			      function(data) { lock = 0; }
-			     );
-		}
+
+		// if ( lock === 0 ) {
+		// 	lock = 1;
+		// 	$.get('/motors?rVal=' + percentage + '&rDir=' + dir,
+		// 	      function(data) { lock = 0; }
+		// 	     );
+		// }
 	}
 
 	rotationalControl.addEventListener('touchstart', rotationHandler, false);
@@ -104,10 +114,15 @@ $(document).ready(function() {
 		var edge = 300;
 		var _x = (x - (edge/2))/(edge/2);
 		var _y = -1*(y - (edge/2))/(edge/2);
-		console.log("TRANSLATION: " + _x + "," + _y);
+
+		// Update globals
+		x = _x;
+		y = _y;
+		drawTranslationalControl();
 
 		var xVal = (_x < 0) ? -1 * _x : _x;
 		var yVal = (_y < 0) ? -1 * _y : _y;
+
 
 		var xDir = FWD;
 		if (_x < 0) { xDir = REV; }
@@ -130,15 +145,11 @@ $(document).ready(function() {
 
 });
 
-// draw ui when page is ready
-$(function () {
 
-	//////////////////////////
-	/////// STOP BUTTON //////
-	//////////////////////////
-
+var drawStopButton = function () {
 	// Background
 	var ctx = document.getElementById("stopButton").getContext("2d");
+	ctx.beginPath();
 	ctx.fillStyle = "#FF0000";
 	var width = 300;
 	var padding = 50;
@@ -149,36 +160,47 @@ $(function () {
 	ctx.fillStyle = "#000000";
 	ctx.font="30px Verdana";
 	ctx.fillText("STOP", 110, 90);
+}
 
-	//////////////////////////
-	/// ROTATIONAL CONTROL ///
-	//////////////////////////
-	
+var deadZoneColor = "blue";
+var activeZoneColor = "gray";
+var positionIndicatorColor = "white";
+
+var drawRotationalControl = function () {	
 	var rotational = document.getElementById("rotationalControl")
 	var ctx = rotational.getContext("2d");
 
 	var height = rotational.height;
 	var width = rotational.width;
-
+	ctx.clearRect (0, 0, width, height);
+	
 	ctx.beginPath();
-	ctx.fillStyle="gray";
-	ctx.rect(0,0,width, height * .4);
+	ctx.fillStyle = activeZoneColor;
+	ctx.rect(0, 0, width, height * .4);
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.fillStyle="blue";
+	ctx.fillStyle = deadZoneColor;
 	ctx.rect(0,height * .4, width, height * .6);
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.fillStyle="gray";
+	ctx.fillStyle = activeZoneColor;
 	ctx.rect(0,height * .6, width, height);
 	ctx.fill();
 
-	///////////////////////////
-	/// TRANSLATION CONTROL ///
-	///////////////////////////
+	ctx.beginPath();
+	ctx.fillStyle = positionIndicatorColor;
+	pos =  (height / 2) + (r * height / 2);
+	ctx.lineWidth = 5;
+	console.log(pos);
+	ctx.moveTo(0, pos);
+	ctx.lineTo(width, pos);
+    ctx.stroke();
 
+}
+
+var drawTranslationalControl = function () {
 	var translational = document.getElementById("translationalControl")
 	var ctx = translational.getContext("2d");
 
@@ -188,35 +210,40 @@ $(function () {
 	console.log(width);
 
 	ctx.beginPath();
-	ctx.fillStyle = "gray";
+	ctx.fillStyle =   activeZoneColor;
 	ctx.rect(0,0,width * .4, height * .4);
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.fillStyle = "gray";
+	ctx.fillStyle =   activeZoneColor;
 	ctx.rect(width * .6, 0, width *.4, height * .4);
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.fillStyle = "gray";
+	ctx.fillStyle =   activeZoneColor;
 	ctx.rect(0, height * .6, width * .4, height * .4);
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.fillStyle = "gray";
+	ctx.fillStyle =   activeZoneColor;
 	ctx.rect(width * .6, height * .6, width *.4, height * .4);
 	ctx.fill();
 
 
 	ctx.beginPath();
-	ctx.fillStyle = "blue";
+	ctx.fillStyle =   deadZoneColor;
 	ctx.rect(width * .4, 0, width *.2, height);
 	ctx.fill();
 
 	ctx.beginPath();
-	ctx.fillStyle = "blue";
+	ctx.fillStyle =   deadZoneColor;
 	ctx.rect(0, height * .4, width, height * .2);
 	ctx.fill();
+}
 
-
+// draw ui when page is ready
+$(function () {
+	drawStopButton();
+	drawRotationalControl();
+	drawTranslationalControl();
 });
