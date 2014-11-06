@@ -77,12 +77,12 @@ $(document).ready(function() {
 			dir = REV;
 		}
 
-		// if ( lock === 0 ) {
-		// 	lock = 1;
-		// 	$.get('/motors?rVal=' + percentage + '&rDir=' + dir,
-		// 	      function(data) { lock = 0; }
-		// 	     );
-		// }
+		if ( lock === 0 ) {
+			lock = 1;
+			$.get('/motors?rVal=' + percentage + '&rDir=' + dir,
+			      function(data) { lock = 0; }
+			     );
+		}
 	}
 
 	rotationalControl.addEventListener('touchstart', rotationHandler, false);
@@ -129,12 +129,12 @@ $(document).ready(function() {
 		var yDir = FWD;
 		if (_y < 0) { yDir = REV; }
 
-		// if ( lock === 0 ) {
-		// 	lock = 1;
-		// 	$.get('/motors?xVal=' + xVal + '&xDir=' + xDir + '&yVal=' + yVal + '&yDir=' + yDir,
-		// 	      function(data) { lock = 0; }
-		// 	     );
-		// }
+		if ( lock === 0 ) {
+			lock = 1;
+			$.get('/motors?xVal=' + xVal + '&xDir=' + xDir + '&yVal=' + yVal + '&yDir=' + yDir,
+			      function(data) { lock = 0; }
+			     );
+		}
 	}
 
 	translationalControl.addEventListener('touchstart', translationHandler, false);
