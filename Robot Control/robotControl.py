@@ -80,25 +80,31 @@ def motors():
     # MOTOR 1
     m1Vx = Vx / 2.0 
     m1Vy = 0
+
     m1Val = Vr + m1Vx + m1Vy
     print 'MOTOR 1 ' + str(m1Val)
     m1Dir = REV if (m1Val < 0) else FWD
+
     motorCommand(128, m1Dir, int(math.fabs(m1Val) * 127))
 
     # MOTOR 2
     m2Vx = (-1.0 * Vx / (4.0 * COS30))
     m2Vy = Vy / (COS30 * 2.0)
-    m2Val = Vr + m2Vx + m2Vy    
+
+    m2Val = Vr + m2Vx + m2Vy
     print 'MOTOR 2 ' + str(m2Val)
     m2Dir = REV if (m2Val < 0) else FWD
+
     motorCommand(129, m2Dir, int(math.fabs(m2Val) * 127))
 
     # MOTOR 3
     m3Vx = m2Vx
     m3Vy = -1.0 * Vy / (COS30 * 2.0)
+
     m3Val = Vr + m3Vx + m3Vy
     print 'MOTOR 3 ' + str(m3Val)
     m3Dir = REV if (m3Val < 0) else FWD
+
     motorCommand(130, m3Dir, int(math.fabs(m3Val) * 127))
 
     return('M1 %d %d, M2 %d %d, M3 %d %d' % (rVal,rDir,xVal,xDir,yVal,yDir))

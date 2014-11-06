@@ -132,7 +132,10 @@ $(document).ready(function() {
 
 // draw ui when page is ready
 $(function () {
-	// STOP BUTTON
+
+	//////////////////////////
+	/////// STOP BUTTON //////
+	//////////////////////////
 
 	// Background
 	var ctx = document.getElementById("stopButton").getContext("2d");
@@ -147,11 +150,10 @@ $(function () {
 	ctx.font="30px Verdana";
 	ctx.fillText("STOP", 110, 90);
 
-
-	console.log("DRAWING");
-	/// ROTATIONAL CONTROL
-	var height = 400;
-	var deadzone = 20;
+	//////////////////////////
+	/// ROTATIONAL CONTROL ///
+	//////////////////////////
+	
 	var rotational = document.getElementById("rotationalControl")
 	var ctx = rotational.getContext("2d");
 
@@ -171,6 +173,49 @@ $(function () {
 	ctx.beginPath();
 	ctx.fillStyle="gray";
 	ctx.rect(0,height * .6, width, height);
+	ctx.fill();
+
+	///////////////////////////
+	/// TRANSLATION CONTROL ///
+	///////////////////////////
+
+	var translational = document.getElementById("translationalControl")
+	var ctx = translational.getContext("2d");
+
+	var height = translational.height;
+	var width = translational.width;
+	console.log(height);
+	console.log(width);
+
+	ctx.beginPath();
+	ctx.fillStyle = "gray";
+	ctx.rect(0,0,width * .4, height * .4);
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.fillStyle = "gray";
+	ctx.rect(width * .6, 0, width *.4, height * .4);
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.fillStyle = "gray";
+	ctx.rect(0, height * .6, width * .4, height * .4);
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.fillStyle = "gray";
+	ctx.rect(width * .6, height * .6, width *.4, height * .4);
+	ctx.fill();
+
+
+	ctx.beginPath();
+	ctx.fillStyle = "blue";
+	ctx.rect(width * .4, 0, width *.2, height);
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.fillStyle = "blue";
+	ctx.rect(0, height * .4, width, height * .2);
 	ctx.fill();
 
 
