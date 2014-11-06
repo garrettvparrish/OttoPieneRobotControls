@@ -20,6 +20,8 @@ function mouseMove(event) {
 
 var FWD = 0;
 var REV = 1;
+var TOUCHINGROTATION = false;
+var TOUCHINGTRANSLATION = false;
 
 // DIR: 0 = FWD, 1 = REV
 
@@ -45,8 +47,17 @@ $(document).ready(function() {
 	var rotationHandler = function (e) {
 		// No bounce
 		e.preventDefault();
+		
+		TOUCHINGROTATION = true;
 
-		var touch = e.touches[0];
+		var touch;
+		if (!TOUCHINGTRANSLATION) {
+			touch = e.touches[0];
+		} else {
+			touch = e.touches[1];
+		}
+
+
 		var rect = rotationalControl.getBoundingClientRect();
 		var y = touch.pageY - rect.top;
 		var dir = FWD;
@@ -66,15 +77,27 @@ $(document).ready(function() {
 
 	rotationalControl.addEventListener('touchstart', rotationHandler, false);
 	rotationalControl.addEventListener('touchmove', rotationHandler, false);
+	rotationalControl.addEventListener('touchend'), function (e)  {
+		TOUCHINGROTATION = false;
+	}, false);
 
 	// translational control	
 	var translationalControl = document.getElementById("translationalControl");
 
 	var translationHandler = function (e) {
+
+		// Multiple touches
+		TOUCHINGTRANSLATION = true;
+		var touch;
+		if (!TOUCHINGROTATION) {
+			touch = e.touches[0];
+		} else {
+			touch = e.touches[1];
+		}
+
 		// No bounce
 		e.preventDefault();
 
-		var touch = e.touches[0];
 		var rect = translationalControl.getBoundingClientRect();
 		var x = touch.pageX - rect.left;
 		var y = touch.pageY - rect.top;
@@ -101,6 +124,9 @@ $(document).ready(function() {
 
 	translationalControl.addEventListener('touchstart', translationHandler, false);
 	translationalControl.addEventListener('touchmove', translationHandler, false);
+	translationalControl.addEventListener('touchend'), function (e)  {
+		TOUCHINGTRANSLATION = false;
+	}, false);
 
 });
 
