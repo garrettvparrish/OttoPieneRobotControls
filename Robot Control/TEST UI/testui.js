@@ -4,24 +4,19 @@
 // without this, you can get requests totally out of order
 
 var lock = 0;
-
 function mouseMove(event) {
     var speed = event.pageY / 4; // Just a hack to make the control box bigger
     if ( lock === 0 ) {
-		lock = 1;
-		$.get('/motors?m1s=' + speed + '&m2s=' + speed +'&m3s=' + speed,
-		      function(data) {
-			  $('#rotationalContro').html(data);
-			  lock = 0;
-		      }
-		     );
+	lock = 1;
+	$.get('/motors?m1s=' + speed + '&m2s=' + speed +'&m3s=' + speed,
+	      function(data) {
+		  $('#rotationalControl').html(data);
+		  lock = 0;
+	      }
+	     );
     }
 }
 
-var FWD = 0;
-var REV = 1;
-
-// DIR: 0 = FWD, 1 = REV
 
 // HANDLERS
 $(document).ready(function() {
@@ -29,11 +24,6 @@ $(document).ready(function() {
     // stop button
   	var stopHandler = function (e) { 
 		console.log("STOP");
-
-		if ( lock === 0 ) {
-			lock = 1;
-			$.get('/motorstop', function(data) { lock = 0; } );   
-	    }
   	}
 
     var stopButton = document.getElementById("stopButton");
@@ -43,25 +33,26 @@ $(document).ready(function() {
 	var rotationalControl = document.getElementById("rotationalControl");
 
 	var rotationHandler = function (e) {
-		// No bounce
-		e.preventDefault();
-
 		var touch = e.touches[0];
 		var rect = rotationalControl.getBoundingClientRect();
 		var y = touch.pageY - rect.top;
-		var dir = FWD;
-		var height = 400;
-		var percentage = (y - (height/2)) / (height/2);
-		if (percentage < 0) { 
-			percentage = -1*percentage;
-			dir = REV;
-		}
+
+		var dir = (y < 0) ? 0 : 1;
+
+		var height = 550;
+		var percentage = -1*(y - (height/2)) / (height/2);
+		
+		console.log("ROTATION: " + percentage);
 		if ( lock === 0 ) {
 			lock = 1;
-			$.get('/motors?rVal=' + percentage + '&rDir=' + dir,
-			      function(data) { lock = 0; }
+			$.get('/motors?rVal=' + speed + '&rDir=' + speed,
+			      function(data) {
+				  $('#rotationalControl').html(data);
+				  lock = 0;
+			      }
 			     );
 		}
+
 	}
 
 	rotationalControl.addEventListener('touchstart', rotationHandler, false);
@@ -71,9 +62,6 @@ $(document).ready(function() {
 	var translationalControl = document.getElementById("translationalControl");
 
 	var translationHandler = function (e) {
-		// No bounce
-		e.preventDefault();
-
 		var touch = e.touches[0];
 		var rect = translationalControl.getBoundingClientRect();
 		var x = touch.pageX - rect.left;
@@ -82,21 +70,6 @@ $(document).ready(function() {
 		var _x = (x - (edge/2))/(edge/2);
 		var _y = -1*(y - (edge/2))/(edge/2);
 		console.log("TRANSLATION: " + _x + "," + _y);
-
-		var xVal = (_x < 0) ? -1 * _x : _x;
-		var yVal = (_y < 0) ? -1 * _y : _y;
-
-		var xDir = FWD;
-		if (_x < 0) { xDir = REV; }
-		var yDir = FWD;
-		if (_y < 0) { yDir = REV; }
-
-		if ( lock === 0 ) {
-			lock = 1;
-			$.get('/motors?xVal=' + xVal + '&xDir=' + xDir, '&yVal=' + yVal, '&yDir=' + yDir,
-			      function(data) { lock = 0; }
-			     );
-		}
 	}
 
 	translationalControl.addEventListener('touchstart', translationHandler, false);
