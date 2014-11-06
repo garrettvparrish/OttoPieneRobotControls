@@ -93,7 +93,7 @@ $(document).ready(function() {
 
 		if ( lock === 0 ) {
 			lock = 1;
-			$.get('/motors?xVal=' + xVal + '&xDir=' + xDir '&yVal=' + yVal '&yDir=' + yDir,
+			$.get('/motors?xVal=' + xVal + '&xDir=' + xDir +'&yVal=' + yVal '&yDir=' + yDir,
 			      function(data) { lock = 0; }
 			     );
 		}
