@@ -27,8 +27,6 @@ var r = 0;
 var x = 0;
 var y = 0;
 
-// DIR: 0 = FWD, 1 = REV
-
 // HANDLERS
 $(document).ready(function() {
 
