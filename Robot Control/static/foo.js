@@ -148,12 +148,30 @@ $(function () {
 	ctx.fillText("STOP", 110, 90);
 
 
+	console.log("DRAWING");
 	/// ROTATIONAL CONTROL
 	var height = 400;
 	var deadzone = 20;
-	ctx = document.getElementById("rotationalControl").getContext("2d");
-	ctx.fillStyle = "#FF0000";
-	ctx.rect = (0, 180, 40, 40);
+	var rotational = document.getElementById("rotationalControl")
+	var ctx = rotational.getContext("2d");
+
+	var height = rotational.height;
+	var width = rotational.width;
+
+	ctx.beginPath();
+	ctx.fillStyle="gray";
+	ctx.rect(0,0,width, height * .4);
 	ctx.fill();
-	
+
+	ctx.beginPath();
+	ctx.fillStyle="blue";
+	ctx.rect(0,height * .4, width, height * .6);
+	ctx.fill();
+
+	ctx.beginPath();
+	ctx.fillStyle="gray";
+	ctx.rect(0,height * .6, width, height);
+	ctx.fill();
+
+
 });
