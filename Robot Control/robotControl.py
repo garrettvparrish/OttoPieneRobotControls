@@ -42,7 +42,7 @@ def motorCommand(id, dir, val):
     write(170)
     write(id)
     write(dir)
-    write(val)
+    write(min(val, 100))
     write((id + dir + val) & 0b01111111)
 
 ### FLASK SERVER ###
