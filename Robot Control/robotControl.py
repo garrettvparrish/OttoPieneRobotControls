@@ -22,6 +22,13 @@ print "Serial connection initialized."
 
 ### GLOBAL VARIABLES ###
 
+FWD = 0
+REV = 1
+COS60 = .5
+SIN30 = .5
+COS30 = .866
+SIN60 = .866
+
 x = ''
 y = ''
 r = ''
@@ -75,30 +82,46 @@ def motors():
     global rVal,rDir,xVal,xDir,yVal,yDir
     m1,m2,m3 = False,False,False
     if request.args.get('rVal') is not None:
-        rVal = int(float(request.args.get('rVal')))
-        m1 = True
+        rVal = float(request.args.get('rVal'))
     if request.args.get('rDir') is not None:
         rDir = int(float(request.args.get('rDir')))
-        m1 = True
     if request.args.get('xVal') is not None:
         xVal = int(float(request.args.get('xVal')))
-        m2 = True
     if request.args.get('xDir') is not None:
         xDir = int(float(request.args.get('xDir')))
-        m2 = True
     if request.args.get('yVal') is not None:
         yVal = int(float(request.args.get('yVal')))
-        m3 = True
     if request.args.get('yDir') is not None:
         yDir = int(float(request.args.get('yDir')))
-        m3 = True
 
-    if m1 is True:
-        motorCommand(128, rDir, rVal)
-    if m2 is True:
-        motorCommand(129, xDir, xVal)
-    if m3 is True:
-        motorCommand(130, yDir, yVal)
+    # strip out the inital velocities
+    Vr = int(rVal * 127.0/3.0) # split equally between all three motors --> all same
+    Vx = xVal if (xDir == FWD) else -1.0*xVal # horizontal velocity
+    Vy = yVal if (yDir == FWD) else -1.0*yVal # vertical velocity
+
+    # MOTOR 1
+    m1Vx = Vx / 2.0 
+    m1Vy = 0
+
+    m1Val = Vr + m1Vx + m1Vy
+    m1Dir = REV if (m1Val < 0) else FWD
+    motorCommand(128, m1Dir, int(math.fabs(m1Val)))
+
+    # MOTOR 2
+    m2Vx = (-1.0 * COS60 * Vx / 2.0) / 2.0 * 127
+    m2Vy = Vy / (COS30 * 2.0)
+
+    m2Val = Vr + m2Vx + m2Vy
+    m2Dir = REV if (m2Val < 0) else FWD
+    motorCommand(129, m2Dir, int(math.fabs(m2Val)))
+
+    # MOTOR 3
+    m3Vx = (-1.0 * COS60 * Vx / 2.0) / 2.0 * 127
+    m3Vy = -1.0 * Vy / (COS30 * 2.0)
+
+    m3Val = Vr + m3Vx + m2Vy
+    m3Dir = REV if (m3Val < 0) else FWD
+    motorCommand(130, m3Dir, int(math.fabs(m3Val)))
 
     return('M1 %d %d, M2 %d %d, M3 %d %d' % (rVal,rDir,xVal,xDir,yVal,yDir))
 
