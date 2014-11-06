@@ -77,7 +77,7 @@ $(document).ready(function() {
 
 	rotationalControl.addEventListener('touchstart', rotationHandler, false);
 	rotationalControl.addEventListener('touchmove', rotationHandler, false);
-	rotationalControl.addEventListener('touchend'), function (e)  {
+	rotationalControl.addEventListener('touchend', function (e)  {
 		TOUCHINGROTATION = false;
 	}, false);
 
@@ -124,7 +124,7 @@ $(document).ready(function() {
 
 	translationalControl.addEventListener('touchstart', translationHandler, false);
 	translationalControl.addEventListener('touchmove', translationHandler, false);
-	translationalControl.addEventListener('touchend'), function (e)  {
+	translationalControl.addEventListener('touchend', function (e)  {
 		TOUCHINGTRANSLATION = false;
 	}, false);
 
