@@ -146,4 +146,14 @@ $(function () {
 	ctx.fillStyle = "#000000";
 	ctx.font="30px Verdana";
 	ctx.fillText("STOP", 110, 90);
+
+
+	/// ROTATIONAL CONTROL
+	var height = 400;
+	var deadzone = 20;
+	ctx = document.getElementById("rotationalControl").getContext("2d");
+	ctx.fillStyle = "#FF0000";
+	ctx.rect = (0, 180, 40, 40);
+	ctx.fill();
+	
 });
