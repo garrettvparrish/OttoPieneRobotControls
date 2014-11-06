@@ -23,9 +23,9 @@ var REV = 1;
 var TOUCHINGROTATION = false;
 var TOUCHINGTRANSLATION = false;
 
-var r;
-var x;
-var y;
+var r = 0;
+var x = 0;
+var y = 0;
 
 // DIR: 0 = FWD, 1 = REV
 
@@ -118,7 +118,7 @@ $(document).ready(function() {
 		// Update globals
 		x = _x;
 		y = _y;
-		drawTranslationalControl();
+		drawTranslationalControl(x, y);
 
 		var xVal = (_x < 0) ? -1 * _x : _x;
 		var yVal = (_y < 0) ? -1 * _y : _y;
@@ -129,12 +129,12 @@ $(document).ready(function() {
 		var yDir = FWD;
 		if (_y < 0) { yDir = REV; }
 
-		if ( lock === 0 ) {
-			lock = 1;
-			$.get('/motors?xVal=' + xVal + '&xDir=' + xDir + '&yVal=' + yVal + '&yDir=' + yDir,
-			      function(data) { lock = 0; }
-			     );
-		}
+		// if ( lock === 0 ) {
+		// 	lock = 1;
+		// 	$.get('/motors?xVal=' + xVal + '&xDir=' + xDir + '&yVal=' + yVal + '&yDir=' + yDir,
+		// 	      function(data) { lock = 0; }
+		// 	     );
+		// }
 	}
 
 	translationalControl.addEventListener('touchstart', translationHandler, false);
@@ -166,7 +166,7 @@ var deadZoneColor = "blue";
 var activeZoneColor = "gray";
 var positionIndicatorColor = "white";
 
-var drawRotationalControl = function () {	
+var drawRotationalControl = function (_r) {	
 	var rotational = document.getElementById("rotationalControl")
 	var ctx = rotational.getContext("2d");
 
@@ -191,23 +191,20 @@ var drawRotationalControl = function () {
 
 	ctx.beginPath();
 	ctx.fillStyle = positionIndicatorColor;
-	pos =  (height / 2) + (r * height / 2);
+	var pos = (height / 2) + (r * height / 2);
 	ctx.lineWidth = 5;
-	console.log(pos);
 	ctx.moveTo(0, pos);
 	ctx.lineTo(width, pos);
     ctx.stroke();
 
 }
 
-var drawTranslationalControl = function () {
+var drawTranslationalControl = function (_x,_y) {
 	var translational = document.getElementById("translationalControl")
 	var ctx = translational.getContext("2d");
 
 	var height = translational.height;
 	var width = translational.width;
-	console.log(height);
-	console.log(width);
 
 	ctx.beginPath();
 	ctx.fillStyle =   activeZoneColor;
@@ -229,7 +226,6 @@ var drawTranslationalControl = function () {
 	ctx.rect(width * .6, height * .6, width *.4, height * .4);
 	ctx.fill();
 
-
 	ctx.beginPath();
 	ctx.fillStyle =   deadZoneColor;
 	ctx.rect(width * .4, 0, width *.2, height);
@@ -239,11 +235,29 @@ var drawTranslationalControl = function () {
 	ctx.fillStyle =   deadZoneColor;
 	ctx.rect(0, height * .4, width, height * .2);
 	ctx.fill();
+
+	// y
+	ctx.beginPath();
+	ctx.fillStyle = positionIndicatorColor;
+	var yPos =  (height / 2) - (_y * height / 2);
+	ctx.lineWidth = 5;
+	ctx.moveTo(0, yPos);
+	ctx.lineTo(width, yPos);
+    ctx.stroke();
+
+    // x
+	ctx.beginPath();
+	ctx.fillStyle = positionIndicatorColor;
+	xPos =  (width / 2) + (_x * width / 2);
+	ctx.lineWidth = 10;
+	ctx.moveTo(xPos, 0);
+	ctx.lineTo(xPos, height);
+    ctx.stroke();
 }
 
 // draw ui when page is ready
 $(function () {
 	drawStopButton();
-	drawRotationalControl();
-	drawTranslationalControl();
+	drawRotationalControl(0);
+	drawTranslationalControl(0,0);
 });
