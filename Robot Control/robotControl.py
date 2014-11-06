@@ -29,13 +29,6 @@ SIN30 = .5
 COS30 = .866
 SIN60 = .866
 
-x = ''
-y = ''
-r = ''
-lastAngle = 0
-lastMotors = [1500,1500,1500]
-defaultMotors = [1500,1500,1500]
-
 ### MOTOR CONTROL ###
 
 # serial port helper function
@@ -47,31 +40,16 @@ def write(val):
 # val : 0 - 127
 def motorCommand(id, dir, val):
     write(170)
-
     write(id)
     write(dir)
     write(val)
     write((id + dir + val) & 0b01111111)
-
-
-# mapping function to control the motor
-def writeToMotors(x, y ,r):
-    _r = int(float(r) * 127)
-    motorCommand(128, 1, _r)
-    motorCommand(129, 1, _r)
-    motorCommand(130, 1, _r)
-
 
 ### FLASK SERVER ###
 
 @app.route('/')
 def index():
     return app.send_static_file('foo.html')
-
-@app.route('/test', methods=['GET', 'POST'])
-def test():
-    print request.args.get('foo')
-    return('ok')
 
 rVal,rDir = 0,0
 xVal,xDir = 0,0
@@ -86,42 +64,42 @@ def motors():
     if request.args.get('rDir') is not None:
         rDir = int(float(request.args.get('rDir')))
     if request.args.get('xVal') is not None:
-        xVal = int(float(request.args.get('xVal')))
+        xVal = float(request.args.get('xVal'))
     if request.args.get('xDir') is not None:
         xDir = int(float(request.args.get('xDir')))
     if request.args.get('yVal') is not None:
-        yVal = int(float(request.args.get('yVal')))
+        yVal = float(request.args.get('yVal'))
     if request.args.get('yDir') is not None:
         yDir = int(float(request.args.get('yDir')))
 
     # strip out the inital velocities
-    Vr = int(rVal * 127.0/3.0) # split equally between all three motors --> all same
+    Vr = rVal / 3.0 if (rDir == FWD) else -1.0*rVal # split equally between all three motors --> all same
     Vx = xVal if (xDir == FWD) else -1.0*xVal # horizontal velocity
     Vy = yVal if (yDir == FWD) else -1.0*yVal # vertical velocity
 
     # MOTOR 1
     m1Vx = Vx / 2.0 
     m1Vy = 0
-
     m1Val = Vr + m1Vx + m1Vy
+    print 'MOTOR 1 ' + str(m1Val)
     m1Dir = REV if (m1Val < 0) else FWD
-    motorCommand(128, m1Dir, int(math.fabs(m1Val)))
+    motorCommand(128, m1Dir, int(math.fabs(m1Val) * 127))
 
     # MOTOR 2
-    m2Vx = (-1.0 * COS60 * Vx / 2.0) / 2.0 * 127
+    m2Vx = (-1.0 * Vx / (4.0 * COS30))
     m2Vy = Vy / (COS30 * 2.0)
-
-    m2Val = Vr + m2Vx + m2Vy
+    m2Val = Vr + m2Vx + m2Vy    
+    print 'MOTOR 2 ' + str(m2Val)
     m2Dir = REV if (m2Val < 0) else FWD
-    motorCommand(129, m2Dir, int(math.fabs(m2Val)))
+    motorCommand(129, m2Dir, int(math.fabs(m2Val) * 127))
 
     # MOTOR 3
-    m3Vx = (-1.0 * COS60 * Vx / 2.0) / 2.0 * 127
+    m3Vx = m2Vx
     m3Vy = -1.0 * Vy / (COS30 * 2.0)
-
-    m3Val = Vr + m3Vx + m2Vy
+    m3Val = Vr + m3Vx + m3Vy
+    print 'MOTOR 3 ' + str(m3Val)
     m3Dir = REV if (m3Val < 0) else FWD
-    motorCommand(130, m3Dir, int(math.fabs(m3Val)))
+    motorCommand(130, m3Dir, int(math.fabs(m3Val) * 127))
 
     return('M1 %d %d, M2 %d %d, M3 %d %d' % (rVal,rDir,xVal,xDir,yVal,yDir))
 
