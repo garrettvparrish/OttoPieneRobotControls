@@ -122,7 +122,7 @@ $(document).ready(function() {
 		var yVal = (_y < 0) ? -1 * _y : _y;
 
 
-		var xDir = FWD;
+		var xDir = REV;
 		if (_x < 0) { xDir = FWD; }
 		var yDir = FWD;
 		if (_y < 0) { yDir = REV; }
