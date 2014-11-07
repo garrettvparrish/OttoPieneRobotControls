@@ -123,7 +123,7 @@ $(document).ready(function() {
 
 
 		var xDir = FWD;
-		if (_x < 0) { xDir = REV; }
+		if (_x < 0) { xDir = FWD; }
 		var yDir = FWD;
 		if (_y < 0) { yDir = REV; }
 
